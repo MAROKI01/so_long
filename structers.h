@@ -9,6 +9,8 @@
 #include <math.h>
 #include <unistd.h>
 
+#include "libft.h"
+
 typedef struct s_img
 {
 		void	*addr;
@@ -20,16 +22,15 @@ typedef struct s_img
 		int		h;
 		int 	p_x;
 		int		p_y;
+		
 } t_img;
 
 typedef struct s_data {
     void    *mlx;
     void    *win;
-    void    *base_img;
-    int     width;
-    int     height;
 	t_img 	bg;
     t_img	image;
+	int		keys[256];
 } t_data;
 
 #endif

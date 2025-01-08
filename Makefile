@@ -4,13 +4,15 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx -lX11 -lXext -lm
 
-SRC = main.c image_manipulation.c
+SRC = main.c so_long_utils.c
 OBJ = $(SRC:.c=.o)
+
+LIBFT = libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

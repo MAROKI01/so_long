@@ -1,36 +1,90 @@
 #include "so_long_utils.h"
 
 // function to close the window
-int close_window(int keycode, void *param)
+int clean_up(void *param)
 {
 	t_data *data;
 	
 	data = (t_data *) param;
-	if (keycode == XK_Escape)
+	if (data->image.ptr)
+		mlx_destroy_image(data->mlx, data->image.ptr);
+	
+	if(data->bg.ptr)
+		mlx_destroy_image(data->mlx, data->bg.ptr);
+
+	if(data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	
+	if(data->mlx)
 	{
-		mlx_destroy_window(data->mlx,data->win);
 		mlx_destroy_display(data->mlx);
-		exit(0);
+		free(data->mlx);
 	}
 	return (0);
 }
 
-int gravity(t_img *ring, t_img *bg, t_data *data)
+int gravity(t_data *data)
 {
-	if (ring->p_y < 650)
+	if (data->image.p_y < 650)
 	{
-		ring->p_y += 1;
-		put_img_to_img(bg, ring, 200, ring->p_y);
-		mlx_put_image_to_window(data->mlx, data->win, bg->ptr,0, 0);
+		data->image.p_y += 1;
+		
 	}
 	return(0);
 }
 
+// keypress 
+int key_press(int keycode, void *param)
+{
+	t_data *data = (t_data *)param;
+
+	if (keycode >= 0 && keycode <= 256)
+		data->keys[keycode] = 1;
+	return (0);
+}
+// keyrealease
+int key_release(int keycode, void *param)
+{
+	t_data *data = (t_data *)param;
+
+	if (keycode >= 0 && keycode <= 256)
+		data->keys[keycode] = 0;
+	return (0);
+}
+
+int keys_function(void *param)
+{
+	t_data *data = (t_data *)param;
+
+	// if (data->keys[XK_Escape])
+	// {
+	// 	clean_up(data);
+	// 	exit(0);
+	// }
+	if(data->keys[XK_w])
+		data->image.p_y -= 2;
+	if(data->keys[XK_d])
+		data->image.p_x += 2;
+	if(data->keys[XK_s])
+		data->image.p_y += 2;
+	if(data->keys[XK_a])
+		data->image.p_x -= 2;
+
+	// if (data->image.p_y < 600)
+	// 	gravity(data);
+	
+	if (data->bg.ptr)
+		mlx_destroy_image(data->mlx, data->bg.ptr);
+
+	data->bg = new_file_img("textures/lotr_map.xpm", *data);
+
+	put_img_to_img(&data->bg, &data->image, data->image.p_x, data->image.p_y);
+	mlx_put_image_to_window(data->mlx, data->win, data->bg.ptr,0, 0);
+	return(0);
+}
 int main(void)
 {
     t_data  data;
-	t_img 	bg;
-    t_img	image;
 
     // Initialize
     data.mlx = mlx_init();
@@ -41,40 +95,36 @@ int main(void)
     data.win = mlx_new_window(data.mlx, 1000, 650, "Animation");
     if (!data.win)
 	{
-		mlx_destroy_display(data.mlx);
-		free(data.mlx);
+		clean_up(&data);
         return (1);
 	}
     
     // Load map
 
-	bg = new_file_img("textures/lotr_map.xpm", data);
-	if (!bg.ptr)
+	data.bg = new_file_img("textures/lotr_map.xpm", data);
+	if (!data.bg.ptr)
 	{
-		mlx_destroy_window(data.mlx,data.win);
-		mlx_destroy_display(data.mlx);
-		free(data.mlx);
+		clean_up(&data);
         return (1);
 	}
 
-	image = new_file_img("textures/ring.xpm", data);
-	if (!image.ptr)
+	data.image = new_file_img("textures/ring.xpm", data);
+	if (!data.image.ptr)
     {
-		mlx_destroy_image(data.mlx,bg.ptr);
-		mlx_destroy_window(data.mlx,data.win);
-		mlx_destroy_display(data.mlx);
-		free(data.mlx);
+		clean_up(&data);
         return (1);
 	}
-	image.p_y = 100;
-	image.p_x = 200;
-	put_img_to_img(&bg, &image,image.p_x,image.p_y);
 
-	mlx_put_image_to_window(data.mlx, data.win, bg.ptr,10, 10);
+	data.image.p_y = 100;
+	data.image.p_x = 200;
 
-	// Hooks 
-	mlx_key_hook(data.win, close_window, &data);
-	mlx_loop_hook(data.mlx, gravity, &data);
+	ft_memset(data.keys, 0, sizeof(data.keys));
+
+	printf("%d", data.keys[55]);
+	// Hooks
+	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_loop_hook(data.mlx, keys_function, &data);
     mlx_loop(data.mlx);
     return (0);
 }
