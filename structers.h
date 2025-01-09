@@ -1,6 +1,8 @@
 #ifndef STRUCTERS_H
 #define STRUCTERS_H
 
+#define MAX_KEYS 256
+
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include "mlx.h"
@@ -10,6 +12,7 @@
 #include <unistd.h>
 
 #include "libft.h"
+
 
 typedef struct s_img
 {
@@ -31,6 +34,15 @@ typedef struct s_data {
 	t_img 	bg;
     t_img	image;
 	int		keys[256];
+	char    **grid;     
+    int     width;      
+    int     height;     
+    t_img    *wall;      
+    void    *floor;     
+    void    *collect;   
+    void    *exit;      
+    void    *player;   
+    int     img_size; 
 } t_data;
 
 #endif
