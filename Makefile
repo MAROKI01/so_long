@@ -4,7 +4,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx -lX11 -lXext -lm
 
-SRC = main.c so_long_utils.c physics.c keys_func.c clean_up.c
+SRC = main.c so_long_utils.c physics.c keys_func.c \
+	  clean_up.c get_next_line.c render_map.c load_textures.c\
+	  read_map.c manage_hooks.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libft.a

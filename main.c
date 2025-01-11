@@ -1,47 +1,71 @@
 #include "so_long_utils.h"
 
+void init_player_pos(t_data *data)
+{
+	int x;
+	int y;
+
+	y = 0;
+	 while (y < data->height)
+    {
+        x = 0;
+        while (x < data->width)
+        {
+			if (data->grid[y][x] == 'P')
+			{
+				data->player.p_x = x * IMG_SIZE;
+				data->player.p_y = y * IMG_SIZE;
+				printf("found it at %d - %d", data->player.p_x, data->player.p_y);
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+int init_game(char *data_file)
+{
+    t_data   data;
+
+    // Initialize everything to 0
+    ft_memset(&data, 0, sizeof(t_data));
+
+    data.mlx = mlx_init();
+    if (!data.mlx)
+        return (0);
+
+    if (!read_map(&data, data_file))
+    {
+        clean_up(&data);
+        return (0);
+    }
+
+    // Create window based on data size
+    data.win = mlx_new_window(data.mlx, 
+        data.width * IMG_SIZE, data.height * IMG_SIZE, "Game");
+    if (!data.win)
+    {
+        clean_up(&data);
+        return (0);
+    }
+
+	// Initialize the player position
+	init_player_pos(&data);
+
+    // // Load textures
+    load_textures(&data);
+
+    // Initial render
+    render_map(&data);
+
+    // Set up hooks
+   	manage_hooks(&data);
+    return (1);
+}
 
 int main(void)
 {
-    t_data  data;
-
-    // Initialize
-    data.mlx = mlx_init();
-    if (!data.mlx)
-        return (1);
-    
-    // Create window
-    data.win = mlx_new_window(data.mlx, 1000, 650, "Animation");
-    if (!data.win)
-	{
-		clean_up(&data);
-        return (1);
-	}
-    
-    // Load map
-
-	data.bg = new_file_img("textures/lotr_map.xpm", data);
-	if (!data.bg.ptr)
-	{
-		clean_up(&data);
-        return (1);
-	}
-
-	data.image = new_file_img("textures/ring.xpm", data);
-	if (!data.image.ptr)
-    {
-		clean_up(&data);
-        return (1);
-	}
-
-	data.image.p_y = 100;
-	data.image.p_x = 200;
-
-	ft_memset(data.keys, 0, sizeof(data.keys));
-	// Hooks
-	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
-	mlx_loop_hook(data.mlx, keys_function, &data);
-    mlx_loop(data.mlx);
-    return (0);
+	init_game("map.ber");
+	return (0);
 }

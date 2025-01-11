@@ -18,5 +18,17 @@ int keys_function(void *param);
 int gravity(t_data *data);
 
 /*clean up function*/
-void clean_up(void *param);
+void clean_up(t_data *data);
+
+/*get next line function*/
+char	*get_next_line(int fd);
+
+/*to render the map*/
+int    render_map(t_data *data);
+int read_map(t_data *data, char *filename);
+void load_textures(t_data *data);
+void    render_tile(t_data *data, t_img *tile, int x, int y);
+
+/*manage hooks*/
+void manage_hooks(t_data *data);
 #endif

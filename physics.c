@@ -2,9 +2,9 @@
 
 int gravity(t_data *data)
 {
-	if (data->image.p_y < 650)
+
+	if (data)
 	{
-		data->image.p_y += 1;
 		
 	}
 	return(0);

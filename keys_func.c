@@ -31,25 +31,19 @@ int keys_function(void *param)
 	t_data *data = (t_data *)param;
 
 	if(data->keys[XK_w])
-		data->image.p_y -= 2;
+		data->player.p_y -= 2;
 	if(data->keys[XK_d])
-		data->image.p_x += 2;
+		data->player.p_x += 2;
 	if(data->keys[XK_s])
-		data->image.p_y += 2;
+		data->player.p_y += 2;
 	if(data->keys[XK_a])
-		data->image.p_x -= 2;
+		data->player.p_x -= 2;
 
-	if (data->image.p_y < 600)
-	{
-		gravity(data);
-	
-		if (data->bg.ptr)
-			mlx_destroy_image(data->mlx, data->bg.ptr);
+	printf("[%d - ",data->player.p_y);
+	printf("%d]",data->player.p_x);
+	if (data->player.p_x > 0 && data->player.p_y > 0)
+		render_tile(data, &data->player, data->player.p_x, data->player.p_y);
 
-		data->bg = new_file_img("textures/lotr_map.xpm", *data);
-
-		put_img_to_img(&data->bg, &data->image, data->image.p_x, data->image.p_y);
-		mlx_put_image_to_window(data->mlx, data->win, data->bg.ptr,0, 0);
-	}
+	render_map(data);
 	return(0);
 }
