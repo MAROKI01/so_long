@@ -50,11 +50,11 @@ int init_game(char *data_file)
         return (0);
     }
 
-	// Initialize the player position
-	init_player_pos(&data);
-
     // // Load textures
     load_textures(&data);
+
+	// Initialize the player position
+	init_player_pos(&data);
 
     // Initial render
     render_map(&data);

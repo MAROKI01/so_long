@@ -31,18 +31,17 @@ int keys_function(void *param)
 	t_data *data = (t_data *)param;
 
 	if(data->keys[XK_w])
-		data->player.p_y -= 2;
+		data->player.p_y -= 1;
 	if(data->keys[XK_d])
-		data->player.p_x += 2;
+		data->player.p_x += 1;
 	if(data->keys[XK_s])
-		data->player.p_y += 2;
+		data->player.p_y += 1;
 	if(data->keys[XK_a])
-		data->player.p_x -= 2;
+		data->player.p_x -= 1;
 
-	printf("[%d - ",data->player.p_y);
-	printf("%d]",data->player.p_x);
-	if (data->player.p_x > 0 && data->player.p_y > 0)
-		render_tile(data, &data->player, data->player.p_x, data->player.p_y);
+	// printf("[%d - ",data->player.p_y);
+	// printf("%d]",data->player.p_x);
+	// if (data->player.p_x > 0 && data->player.p_y > 0)
 
 	render_map(data);
 	return(0);

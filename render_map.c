@@ -6,6 +6,13 @@ void    render_tile(t_data *data, t_img *tile, int x, int y)
         x * data->img_size, y * data->img_size);
 }
 
+void    render_player(t_data *data, t_img *tile, int x, int y)
+{
+	if (data && tile)
+   		put_img_to_img(&data->background, tile, 
+        x , y );
+}
+
 int    render_map(t_data *data)
 {
     int x;
@@ -46,8 +53,8 @@ int    render_map(t_data *data)
                 render_tile(data, &data->collect, x, y);
             else if (data->grid[y][x] == 'E')
                 render_tile(data, &data->exit, x, y);
-            // else if (data->grid[y][x] == 'P')
-            //     render_tile(data, &data->player, x, y);
+            else
+				render_player(data, &data->player, data->player.p_x, data->player.p_y);
             x++;
         }
         y++;

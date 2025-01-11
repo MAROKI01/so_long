@@ -28,6 +28,7 @@ int    render_map(t_data *data);
 int read_map(t_data *data, char *filename);
 void load_textures(t_data *data);
 void    render_tile(t_data *data, t_img *tile, int x, int y);
+void    render_player(t_data *data, t_img *tile, int x, int y);
 
 /*manage hooks*/
 void manage_hooks(t_data *data);
