@@ -9,5 +9,5 @@ void load_textures(t_data *data)
     data->floor = new_file_img("textures/floor.xpm",*data);
     data->collect = new_file_img("textures/coin.xpm",*data);
     data->exit = new_file_img("textures/exit.xpm",*data);
-    data->player = new_file_img("textures/player.xpm",*data);
+    data->player = new_file_img("textures/player32.xpm",*data);
 }

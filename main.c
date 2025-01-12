@@ -15,7 +15,6 @@ void init_player_pos(t_data *data)
 			{
 				data->player.p_x = x * IMG_SIZE;
 				data->player.p_y = y * IMG_SIZE;
-				printf("found it at %d - %d", data->player.p_x, data->player.p_y);
 				return ;
 			}
 			x++;

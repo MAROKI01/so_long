@@ -4,6 +4,8 @@
 #define MAX_KEYS 256
 #define BUFFER_SIZE 10
 #define IMG_SIZE 64
+#define PLAYER_H 32
+#define PLAYER_W 32
 
 #include <X11/X.h>
 #include <X11/keysym.h>
