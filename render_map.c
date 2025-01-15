@@ -48,7 +48,12 @@ int    render_map(t_data *data)
             
             // Draw other elements on top
             if (data->grid[y][x] == '1')
-                render_tile(data, &data->wall, x, y);
+			{
+				if (y >= 1 && data->grid[y - 1][x] != '1')
+					render_tile(data, &data->front_wall, x, y);
+				else
+					render_tile(data, &data->middle_wall, x, y);
+			}
             else if (data->grid[y][x] == 'C')
                 render_tile(data, &data->collect, x, y);
             else if (data->grid[y][x] == 'E')

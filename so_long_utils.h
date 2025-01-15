@@ -15,7 +15,7 @@ int key_release(int keycode, void *param);
 int keys_function(void *param);
 
 /*func to handle physics*/
-int gravity(t_data *data);
+void gravity(t_data *data);
 
 /*clean up function*/
 void clean_up(t_data *data);
@@ -32,4 +32,7 @@ void    render_player(t_data *data, t_img *tile, int x, int y);
 
 /*manage hooks*/
 void manage_hooks(t_data *data);
+
+/*func to count the number of each element*/
+int object_counter(t_data *data, char object);
 #endif

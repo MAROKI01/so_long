@@ -3,9 +3,10 @@
 
 #define MAX_KEYS 256
 #define BUFFER_SIZE 10
-#define IMG_SIZE 64
+#define IMG_SIZE 32
 #define PLAYER_H 32
-#define PLAYER_W 32
+#define PLAYER_W 16 
+#define PLAYER_SPEED 1
 
 #include <X11/X.h>
 #include <X11/keysym.h>
@@ -18,6 +19,11 @@
 
 #include "libft.h"
 
+enum objects {
+	wall,
+	exit_g,
+	collectible,
+};
 
 typedef struct s_img
 {
@@ -28,8 +34,8 @@ typedef struct s_img
 		int		endian;
 		int		w;
 		int		h;
-		int 	p_x;
-		int		p_y;
+		float 	p_x;
+		float	p_y;
 		
 } t_img;
 
@@ -40,13 +46,22 @@ typedef struct s_data {
 	char    **grid;     
     int     width;      
     int     height;
-	t_img   background;     
-    t_img    wall;      
+	t_img   background;
+	// for the wall  
+    t_img    front_wall;
+    t_img    back_wall;      
+    t_img    left_wall;      
+    t_img    right_wall;      
+    t_img    corner_wall;
+    t_img    middle_wall;
+
+
     t_img    floor;     
     t_img    collect;   
     t_img    exit;      
     t_img    player;   
-    int     img_size; 
+    int     img_size;
+	int		coins_count;
 } t_data;
 
 #endif

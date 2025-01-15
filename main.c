@@ -23,6 +23,28 @@ void init_player_pos(t_data *data)
 	}
 }
 
+int object_counter(t_data *data, char object)
+{
+	int x;
+	int y;
+	int	count;
+
+	count = 0;
+	y = 0;
+	 while (y < data->height)
+    {
+        x = 0;
+        while (x < data->width)
+        {
+			if (data->grid[y][x] == object)
+				count++;
+			x++;
+		}
+		y++;
+	}
+	return(count);
+}
+
 int init_game(char *data_file)
 {
     t_data   data;
