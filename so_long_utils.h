@@ -12,7 +12,7 @@ t_img	new_file_img(char *path, t_data data);
 /*func to handle keys*/
 int key_press(int keycode, void *param);
 int key_release(int keycode, void *param);
-int keys_function(void *param);
+int keys_function(int keycode, void *param);
 
 /*func to handle physics*/
 void gravity(t_data *data);

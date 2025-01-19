@@ -6,7 +6,7 @@
 #define IMG_SIZE 32
 #define PLAYER_H 32
 #define PLAYER_W 16 
-#define PLAYER_SPEED 1
+#define PLAYER_SPEED 10
 
 #include <X11/X.h>
 #include <X11/keysym.h>
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 
 #include "libft.h"
+#include "printf/ft_printf.h"
 
 enum objects {
 	wall,
@@ -55,6 +56,10 @@ typedef struct s_data {
     t_img    corner_wall;
     t_img    middle_wall;
 
+	int		move_right;
+	int		move_left;
+	int		move_up;
+	int		move_down;
 
     t_img    floor;     
     t_img    collect;   
@@ -62,6 +67,7 @@ typedef struct s_data {
     t_img    player;   
     int     img_size;
 	int		coins_count;
+	int 	moves_counter;
 } t_data;
 
 #endif
