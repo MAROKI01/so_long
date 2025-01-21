@@ -61,7 +61,7 @@ int init_game(char *data_file)
         clean_up(&data);
         return (0);
     }
-
+	
     // Create window based on data size
     data.win = mlx_new_window(data.mlx, 
         data.width * IMG_SIZE, data.height * IMG_SIZE, "Game");

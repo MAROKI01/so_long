@@ -35,4 +35,8 @@ void manage_hooks(t_data *data);
 
 /*func to count the number of each element*/
 int object_counter(t_data *data, char object);
+
+/*parsing map algo*/
+void bfs(char **map, int width, int height, int p_x, int p_y, 
+         int *collectibles, int *exit_found);
 #endif
