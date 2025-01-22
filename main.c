@@ -48,7 +48,8 @@ int object_counter(t_data *data, char object)
 int init_game(char *data_file)
 {
     t_data   data;
-
+	int 	collectibles = 0;
+	int 	exit_found = 0;
     // Initialize everything to 0
     ft_memset(&data, 0, sizeof(t_data));
 
@@ -62,6 +63,10 @@ int init_game(char *data_file)
         return (0);
     }
 	
+	init_player_pos(&data);
+
+	bfs(data.grid,data.width,data.height,(int)data.player.p_x / IMG_SIZE,(int)data.player.p_y / IMG_SIZE,&collectibles ,&exit_found);
+	printf("%d %d", collectibles,exit_found);
     // Create window based on data size
     data.win = mlx_new_window(data.mlx, 
         data.width * IMG_SIZE, data.height * IMG_SIZE, "Game");
@@ -71,7 +76,7 @@ int init_game(char *data_file)
         return (0);
     }
 
-    // // Load textures
+    // Load textures
     load_textures(&data);
 
 	// Initialize the player position

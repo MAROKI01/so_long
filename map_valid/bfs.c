@@ -57,17 +57,17 @@ static void check_current_cell(t_vertex current, char **map, int *collectibles, 
         *exit_found = 1;
 }
 
-static void process_neighbor(t_bfs *data, int nx, int ny)
-{
-    if (within_the_bounds(nx, ny, data->width, data->height))
-    {
-        if (!data->was_visited[ny][nx] && data->map[ny][nx] != '1')
-        {
-            data->was_visited[ny][nx] = 1;
-            data->queue[data->front++] = (t_vertex){nx, ny};
-        }
-    }
-}
+// static void process_neighbor(t_bfs *data, int nx, int ny)
+// {
+//     if (within_the_bounds(nx, ny, data->width, data->height))
+//     {
+//         if (!data->was_visited[ny][nx] && data->map[ny][nx] != '1')
+//         {
+//             data->was_visited[ny][nx] = 1;
+//             data->queue[data->front++] = (t_vertex){nx, ny};
+//         }
+//     }
+// }
 
 static void explore_neighbors(t_bfs *data, t_vertex current)
 {
