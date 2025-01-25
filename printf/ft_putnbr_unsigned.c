@@ -6,11 +6,11 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 17:45:39 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/19 12:05:14 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:48:28 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	ft_putnbr_unsigned(unsigned int n, int *count)
 {

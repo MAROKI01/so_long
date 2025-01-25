@@ -1,4 +1,4 @@
-#include "so_long_utils.h"
+#include "../include/so_long_utils.h"
 
 void	clean_up(t_data *data)
 {
@@ -17,14 +17,6 @@ void	clean_up(t_data *data)
 	{
 		if (data->front_wall.ptr)
 			mlx_destroy_image(data->mlx, data->front_wall.ptr);
-		if (data->back_wall.ptr)
-			mlx_destroy_image(data->mlx, data->back_wall.ptr);
-		if (data->right_wall.ptr)
-			mlx_destroy_image(data->mlx, data->right_wall.ptr);
-		if (data->left_wall.ptr)
-			mlx_destroy_image(data->mlx, data->left_wall.ptr);
-		if (data->corner_wall.ptr)
-			mlx_destroy_image(data->mlx, data->corner_wall.ptr);
 		if (data->middle_wall.ptr)
 			mlx_destroy_image(data->mlx, data->middle_wall.ptr);
 		if (data->floor.ptr)

@@ -1,4 +1,4 @@
-#include "so_long_utils.h"
+#include "../include/so_long_utils.h"
 
 //function to get pixel
 unsigned int get_pixel_img(t_img src, int x, int y)

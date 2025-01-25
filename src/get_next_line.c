@@ -1,6 +1,4 @@
-
-#include "libft.h"
-#include "so_long_utils.h"
+#include "../include/so_long_utils.h"
 
 static char	*join_free(char *stock, char *buffer)
 {

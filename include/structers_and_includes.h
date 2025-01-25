@@ -4,21 +4,21 @@
 #define MAX_KEYS 256
 #define BUFFER_SIZE 10
 #define IMG_SIZE 32
-#define PLAYER_H 32
-#define PLAYER_W 16 
-#define PLAYER_SPEED 10
+#define PLAYER_H 20
+#define PLAYER_W 20 
+#define PLAYER_STEP 8
 
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include "mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
 #include <fcntl.h>
 
+#include "mlx.h"
 #include "libft.h"
-#include "printf/ft_printf.h"
+#include "ft_printf.h"
 
 enum objects {
 	wall,
@@ -35,25 +35,20 @@ typedef struct s_img
 		int		endian;
 		int		w;
 		int		h;
-		float 	p_x;
-		float	p_y;
+		int 	p_x;
+		int		p_y;
 		
 } t_img;
 
 typedef struct s_data {
     void    *mlx;
     void    *win;
-	int		keys[256];
 	char    **grid;     
     int     width;      
     int     height;
 	t_img   background;
 	// for the wall  
     t_img    front_wall;
-    t_img    back_wall;      
-    t_img    left_wall;      
-    t_img    right_wall;      
-    t_img    corner_wall;
     t_img    middle_wall;
 
 	int		move_right;
@@ -63,11 +58,12 @@ typedef struct s_data {
 
     t_img    floor;     
     t_img    collect;   
-    t_img    exit;      
-    t_img    player;   
+    t_img    exit;    
+    t_img    exit_open;
+    t_img    player;  
     int     img_size;
-	int		coins_count;
 	int 	moves_counter;
+	int		is_exit_open;
 } t_data;
 
 #endif

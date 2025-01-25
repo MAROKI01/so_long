@@ -1,4 +1,4 @@
-#include "../so_long_utils.h"
+#include "../include/so_long_utils.h"
 
 typedef struct s_vertex
 {
@@ -57,18 +57,6 @@ static void check_current_cell(t_vertex current, char **map, int *collectibles, 
         *exit_found = 1;
 }
 
-// static void process_neighbor(t_bfs *data, int nx, int ny)
-// {
-//     if (within_the_bounds(nx, ny, data->width, data->height))
-//     {
-//         if (!data->was_visited[ny][nx] && data->map[ny][nx] != '1')
-//         {
-//             data->was_visited[ny][nx] = 1;
-//             data->queue[data->front++] = (t_vertex){nx, ny};
-//         }
-//     }
-// }
-
 static void explore_neighbors(t_bfs *data, t_vertex current)
 {
 	int edges[4][2];
@@ -117,38 +105,3 @@ void bfs(char **map, int width, int height, int p_x, int p_y,
     }
     cleanup_bfs(&data);
 }
-
-// int main() {
-//     // Example map
-//     char *map[] = {
-//         "1111111111111111111111111111111111",
-//         "1P0C00000000000000C00000000000C001",
-//         "1000000000000010100000000000000C01",
-// 		"100000000000001E10000C000000000C01",
-//         "1111111111111111111111111111111111"
-//     };
-
-//     int rows = 34, cols = 5;
-//     int collectibles = 0;
-//     int exit_found = 0;
-
-//     // Find the player's starting position
-//     int start_x = 0, start_y = 0;
-//     for (int i = 0; i < cols; i++) {
-//         for (int j = 0; j < rows; j++) {
-//             if (map[i][j] == 'P') {
-//                 start_x = i;
-//                 start_y = j;
-//             }
-//         }
-//     }
-
-//     // Perform BFS
-//     bfs(map, rows, cols, start_x, start_y, &collectibles, &exit_found);
-
-//     // Results
-//     printf("Collectibles found: %d\n", collectibles);
-//     printf("Exit found: %s\n", exit_found ? "Yes" : "No");
-
-//     return 0;
-// }

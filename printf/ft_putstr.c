@@ -6,11 +6,11 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 16:05:21 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/19 12:04:56 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:48:33 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	ft_putstr(char *s, int *count)
 {
