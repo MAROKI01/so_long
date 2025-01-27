@@ -74,7 +74,7 @@ int render_map(t_data *data)
     
     if (render_grid(data))
         return (1);
-    
+    graphic_counter(data);
     mlx_put_image_to_window(data->mlx, data->win, 
         data->background.ptr, 0, 0);
     return (0);

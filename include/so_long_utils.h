@@ -43,4 +43,7 @@ int object_counter(t_data *data, char object);
 void bfs(char **map, int width, int height, int p_x, int p_y, 
          int *collectibles, int *exit_found);
 int map_checker(t_data *data);
+
+/*for the counter*/
+void graphic_counter(t_data *data);
 #endif

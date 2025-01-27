@@ -20,11 +20,6 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-enum objects {
-	wall,
-	exit_g,
-	collectible,
-};
 
 typedef struct s_img
 {
@@ -51,19 +46,27 @@ typedef struct s_data {
     t_img    front_wall;
     t_img    middle_wall;
 
-	int		move_right;
-	int		move_left;
-	int		move_up;
-	int		move_down;
-
     t_img    floor;     
     t_img    collect;   
     t_img    exit;    
     t_img    exit_open;
-    t_img    player;  
+    t_img    player; 
+
     int     img_size;
 	int 	moves_counter;
 	int		is_exit_open;
-} t_data;
+	int		total_coins;
 
+	t_img	zero;
+	t_img	one;
+	t_img	two;
+	t_img	three;
+	t_img	four;
+	t_img	five;
+	t_img	six;
+	t_img	seven;
+	t_img	eight;
+	t_img	nine;
+	t_img	move_n;
+} t_data;
 #endif

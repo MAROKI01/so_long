@@ -18,10 +18,11 @@ int init_game(char *data_file)
 	
 	init_player_pos(&data);
 
-	printf("%d", map_checker(&data));
+	if (!map_checker(&data))
+		return(1);
     // Create window based on data size
     data.win = mlx_new_window(data.mlx, 
-        data.width * IMG_SIZE, data.height * IMG_SIZE, "Game");
+        data.width * IMG_SIZE, data.height * IMG_SIZE, "So long");
     if (!data.win)
     {
         clean_up(&data);
