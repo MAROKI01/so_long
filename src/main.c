@@ -28,6 +28,7 @@ int init_game(char *data_file)
         clean_up(&data);
         return (0);
     }
+	// In your initialization function
 
     // Load textures
     load_textures(&data);
@@ -43,8 +44,9 @@ int init_game(char *data_file)
     return (1);
 }
 
-int main(void)
+int main(int ac, char **av)
 {
-	init_game("maps/map.ber");
+	(void)ac;
+	init_game(av[1]);
 	return (0);
 }

@@ -53,13 +53,11 @@ static int bfs_checker(t_data *data)
 	int exit_found;
 
 	bfs(data->grid,data->width,data->height,(int)data->player.p_x / IMG_SIZE,(int)data->player.p_y / IMG_SIZE,&collectibles ,&exit_found);
-
 	if(data->total_coins != collectibles)
 	{
 		printf("Error: The collectibles are not accessible");
 		return(0);
 	}
-
 	if (!exit_found)
 	{
 		printf("Error: The exit is not accessible");
@@ -77,9 +75,7 @@ int map_checker(t_data *data)
 	}
 	if (!count_items(data))
 		return(0);
-	
 	if (!bfs_checker(data))
 		return(0);
-
 	return(1);
 }

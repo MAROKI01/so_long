@@ -66,7 +66,8 @@ int check_precise_collision(int keycode, t_data *data)
     if (which_object_to_detect_coll(data, '1', new_x, new_y))
 		return (0);
 	handle_coin_collection(data,new_x,new_y);
-	 if (which_object_to_detect_coll(data, 'E', new_x, new_y) && data->is_exit_open)
+	 if ((which_object_to_detect_coll(data, 'E', new_x, new_y) && data->is_exit_open)
+	 	|| which_object_to_detect_coll(data, 'A', new_x, new_y))
 	 {
 		clean_up(data);
 		exit(0);

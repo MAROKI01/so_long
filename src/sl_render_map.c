@@ -37,7 +37,8 @@ static void render_game_object(t_data *data, int x, int y)
 		else
         	render_tile(data, &data->exit_open, x, y);
 	}
-
+	if (data->grid[y][x] == 'A')
+		render_tile(data, &data->enemy, x, y);
 }
 
 static int render_grid(t_data *data)

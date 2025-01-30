@@ -10,7 +10,7 @@ void load_textures(t_data *data)
     data->collect = new_file_img("textures/coin.xpm",*data);
     data->exit = new_file_img("textures/exit.xpm",*data);
     data->exit_open = new_file_img("textures/exit_open.xpm",*data);
-    data->player = new_file_img("textures/char.xpm",*data);
+    data->player = new_file_img("textures/player.xpm",*data);
     data->zero = new_file_img("textures/digits/0.xpm",*data);
     data->one = new_file_img("textures/digits/1.xpm",*data);
     data->two = new_file_img("textures/digits/2.xpm",*data);
@@ -22,5 +22,5 @@ void load_textures(t_data *data)
     data->eight = new_file_img("textures/digits/8.xpm",*data);
     data->nine = new_file_img("textures/digits/9.xpm",*data);
     data->move_n = new_file_img("textures/digits/move_n.xpm",*data);
-
+    data->enemy = new_file_img("textures/enemy.xpm",*data);
 }

@@ -40,4 +40,6 @@ void graphic_counter(t_data *data)
 		i++;
 		step+=21;
 	}
+	if (counter)	
+		free(counter);
 }
