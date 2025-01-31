@@ -2,28 +2,26 @@
 
 void free_numbers(t_data *data)
 {
-	if (data->one.ptr)
-			mlx_destroy_image(data->mlx, data->one.ptr);
-		if (data->two.ptr)
-			mlx_destroy_image(data->mlx, data->two.ptr);
-		if (data->three.ptr)
-			mlx_destroy_image(data->mlx, data->three.ptr);
-		if (data->four.ptr)
-			mlx_destroy_image(data->mlx, data->four.ptr);
-		if (data->five.ptr)
-			mlx_destroy_image(data->mlx, data->five.ptr);
-		if (data->six.ptr)
-			mlx_destroy_image(data->mlx, data->six.ptr);
-		if (data->seven.ptr)
-			mlx_destroy_image(data->mlx, data->seven.ptr);
-		if (data->eight.ptr)
-			mlx_destroy_image(data->mlx, data->eight.ptr);
-		if (data->nine.ptr)
-			mlx_destroy_image(data->mlx, data->nine.ptr);
-		if (data->zero.ptr)
-			mlx_destroy_image(data->mlx, data->zero.ptr);
-		if (data->move_n.ptr)
-			mlx_destroy_image(data->mlx, data->move_n.ptr);
+	if (data->digits.zero.ptr)
+			mlx_destroy_image(data->mlx, data->digits.zero.ptr);
+		if (data->digits.two.ptr)
+			mlx_destroy_image(data->mlx, data->digits.two.ptr);
+		if (data->digits.three.ptr)
+			mlx_destroy_image(data->mlx, data->digits.three.ptr);
+		if (data->digits.four.ptr)
+			mlx_destroy_image(data->mlx, data->digits.four.ptr);
+		if (data->digits.five.ptr)
+			mlx_destroy_image(data->mlx, data->digits.five.ptr);
+		if (data->digits.six.ptr)
+			mlx_destroy_image(data->mlx, data->digits.six.ptr);
+		if (data->digits.seven.ptr)
+			mlx_destroy_image(data->mlx, data->digits.seven.ptr);
+		if (data->digits.eight.ptr)
+			mlx_destroy_image(data->mlx, data->digits.eight.ptr);
+		if (data->digits.nine.ptr)
+			mlx_destroy_image(data->mlx, data->digits.nine.ptr);
+		if (data->digits.move_n.ptr)
+			mlx_destroy_image(data->mlx, data->digits.move_n.ptr);
 }
 
 void free_images(t_data *data)
@@ -46,9 +44,9 @@ void free_images(t_data *data)
 			mlx_destroy_image(data->mlx, data->background.ptr);
 		if (data->enemy.ptr)
 			mlx_destroy_image(data->mlx, data->enemy.ptr);
-		free_numbers(data);
+		if (data)
+			free_numbers(data);
 }
-
 
 void	clean_up(t_data *data)
 {

@@ -11,16 +11,16 @@ void load_textures(t_data *data)
     data->exit = new_file_img("textures/exit.xpm",*data);
     data->exit_open = new_file_img("textures/exit_open.xpm",*data);
     data->player = new_file_img("textures/player.xpm",*data);
-    data->zero = new_file_img("textures/digits/0.xpm",*data);
-    data->one = new_file_img("textures/digits/1.xpm",*data);
-    data->two = new_file_img("textures/digits/2.xpm",*data);
-    data->three = new_file_img("textures/digits/3.xpm",*data);
-    data->four = new_file_img("textures/digits/4.xpm",*data);
-    data->five = new_file_img("textures/digits/5.xpm",*data);
-    data->six = new_file_img("textures/digits/6.xpm",*data);
-    data->seven = new_file_img("textures/digits/7.xpm",*data);
-    data->eight = new_file_img("textures/digits/8.xpm",*data);
-    data->nine = new_file_img("textures/digits/9.xpm",*data);
-    data->move_n = new_file_img("textures/digits/move_n.xpm",*data);
+    data->digits.zero = new_file_img("textures/digits/0.xpm",*data);
+    data->digits.one = new_file_img("textures/digits/1.xpm",*data);
+    data->digits.two = new_file_img("textures/digits/2.xpm",*data);
+    data->digits.three = new_file_img("textures/digits/3.xpm",*data);
+    data->digits.four = new_file_img("textures/digits/4.xpm",*data);
+    data->digits.five = new_file_img("textures/digits/5.xpm",*data);
+    data->digits.six = new_file_img("textures/digits/6.xpm",*data);
+    data->digits.seven = new_file_img("textures/digits/7.xpm",*data);
+    data->digits.eight = new_file_img("textures/digits/8.xpm",*data);
+    data->digits.nine = new_file_img("textures/digits/9.xpm",*data);
+    data->digits.move_n = new_file_img("textures/digits/move_n.xpm",*data);
     data->enemy = new_file_img("textures/enemy.xpm",*data);
 }

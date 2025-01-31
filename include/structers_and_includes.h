@@ -21,7 +21,6 @@
 #include "ft_printf.h"
 
 
-
 typedef struct s_img
 {
 		void	*addr;
@@ -35,10 +34,35 @@ typedef struct s_img
 		int		p_y;
 } t_img;
 
+typedef struct s_digits
+{
+	t_img	zero;
+	t_img	one;
+	t_img	two;
+	t_img	three;
+	t_img	four;
+	t_img	five;
+	t_img	six;
+	t_img	seven;
+	t_img	eight;
+	t_img	nine;
+	t_img	move_n;
+}t_digits;
+
+typedef struct s_dirc
+{
+	int left;
+	int right;
+	int up;
+	int down;
+}t_dirc;
+
+
 typedef struct s_data {
     void    *mlx;
     void    *win;
-	char    **grid;     
+	char    **grid;  
+	int		keys[256];   
     int     width;      
     int     height;
 	t_img   background;
@@ -54,66 +78,8 @@ typedef struct s_data {
 	int 	moves_counter;
 	int		is_exit_open;
 	int		total_coins;
-	t_img	zero;
-	t_img	one;
-	t_img	two;
-	t_img	three;
-	t_img	four;
-	t_img	five;
-	t_img	six;
-	t_img	seven;
-	t_img	eight;
-	t_img	nine;
-	t_img	move_n;
+	struct s_digits digits;
+	t_dirc direction;
 } t_data;
 
-//////////////////////////////////////////////////////////////
-enum entity {
-	PLAYER,
-	ENEMY,
-	EVENT,
-	OBJ,
-};
-// animation
-
-typedef struct s_list {
-    void *content;           // Pointer to the data held by this node
-    struct s_list *next;     // Pointer to the next node in the list
-} t_list;
-
-typedef struct s_animation {
-	t_list *	frames;
-	int		width;
-	int		height;
-	int		delay;			// How many fps it takes to change animation
-	int		_tmp_delay;		// Delay Iterator
-	int		current_frame_num;	// Which frame is selected
-	long int	last_updated;		// When was the last update
-	long int	frame_count;		// The frame count
-	enum entity	entity;
-}		t_animation;
-
-// sprite
-
-typedef struct s_sprite {
-	t_list	* animations;
-	char	* name;
-	char	* file_path;
-	t_img	sprite_img;
-	int	width;
-	int	height;
-	int	z_index;
-}		t_sprite;
-
-typedef	struct sprite_slice {
-	int x;
-	int y;
-	int width;
-	int height;
-}	sprite_slice;
-
-/* Sprite */
-t_sprite	new_sprite(char * name, char * file_path, t_data *data);
-t_animation *	slice_sprite(t_sprite s, sprite_slice slice, int frames, int delay, enum entity e);
-void	destroy_sprite(t_sprite s);
 #endif
