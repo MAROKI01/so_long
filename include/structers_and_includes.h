@@ -58,6 +58,20 @@ typedef struct s_dirc
 }t_dirc;
 
 
+
+typedef struct s_sprite
+{
+	t_img *frames;
+	int frame_count;
+    int current_frame; 
+	int total_frames;
+} t_sprite;
+
+typedef struct s_object_sprites
+{
+	t_sprite player;
+} t_object_sprites;
+
 typedef struct s_data {
     void    *mlx;
     void    *win;
@@ -80,6 +94,7 @@ typedef struct s_data {
 	int		total_coins;
 	struct s_digits digits;
 	t_dirc direction;
+	t_object_sprites objects;
 } t_data;
 
 #endif

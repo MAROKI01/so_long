@@ -24,6 +24,19 @@ void free_numbers(t_data *data)
 			mlx_destroy_image(data->mlx, data->digits.move_n.ptr);
 }
 
+void free_sprites(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < 11)
+	{
+		if (data->objects.player.frames[i].ptr)
+			mlx_destroy_image(data->mlx, data->objects.player.frames[i].ptr);
+		i++;
+	}
+}
+
 void free_images(t_data *data)
 {
 		if (data->front_wall.ptr)
@@ -61,6 +74,10 @@ void	clean_up(t_data *data)
 	}
 	if (data->mlx)
 		free_images(data);
+
+	if (data->mlx)
+		free_sprites(data);
+	
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)

@@ -10,8 +10,8 @@ void put_img_to_img(t_img *dest, t_img *src, int x, int y);
 t_img	new_file_img(char *path, t_data data);
 
 /*func to handle keys*/
-int key_press(int keycode, t_data *data);
-int key_release(int keycode, t_data *data);
+int key_press(int keycode, void *data);
+int key_release(int keycode, void *data);
 int keys_function(int keycode, void *param);
 
 /*helper functions*/
@@ -46,4 +46,8 @@ int map_checker(t_data *data);
 
 /*for the counter*/
 void graphic_counter(t_data *data);
+
+/*Animation*/
+void load_frames(t_data *data);
+int animation(t_data *data);
 #endif

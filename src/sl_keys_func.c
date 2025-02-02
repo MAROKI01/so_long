@@ -1,33 +1,45 @@
 #include "../include/so_long_utils.h"
 
-int key_press(int keycode, t_data *data)
+int key_press(int keycode, void *param)
 {
+	t_data *data = (t_data *)param;
+
 	if (keycode >= 0 && keycode < MAX_KEYS)
 	{
-		data->keys[keycode] = 1;
 	if (keycode == XK_Escape)
 	{
 		clean_up(data);
 		exit(0);
 	}
-		data->direction.up = data->keys[XK_w];
-        data->direction.right = data->keys[XK_d];
-        data->direction.down = data->keys[XK_s];
-        data->direction.left = data->keys[XK_a];
+	if (keycode == XK_a) 
+        data->direction.left = 1;
+    if (keycode == XK_d) 
+        data->direction.right = 1;
+    if (keycode == XK_w) 
+        data->direction.up = 1;
+    if (keycode == XK_s) 
+        data->direction.down = 1;
+
 	}
 	return (0);
 }
-
-int key_release(int keycode, t_data *data)
+// keyrealease
+int key_release(int keycode, void *param)
 {
+	t_data *data = (t_data *)param;
+
 	if (keycode >= 0 && keycode < MAX_KEYS)
 	{
-		data->keys[keycode] = 0;
-		data->direction.up = data->keys[XK_w];
-        data->direction.right = data->keys[XK_d];
-        data->direction.down = data->keys[XK_s];
-        data->direction.left = data->keys[XK_a];
+	if (keycode == XK_a) 
+        data->direction.left = 0;
+    if (keycode == XK_d) 
+        data->direction.right = 0;
+    if (keycode == XK_w) 
+        data->direction.up = 0;
+    if (keycode == XK_s) 
+        data->direction.down = 0;
 	}
+	// printf("release ; up : %d, down : %d, left : %d, right : %d\n", data->direction.up,data->direction.down,data->direction.left,data->direction.right);
 	return (0);
 }
 
@@ -114,11 +126,13 @@ int keys_function(int keycode, void *param)
         data->player.p_y += PLAYER_STEP;
     if (data->direction.left && check != 0)
         data->player.p_x -= PLAYER_STEP;
-    if ((data->keys[XK_w] || data->keys[XK_d] || data->keys[XK_s] || data->keys[XK_a]) && check != 0)
+    if ((data->direction.up || data->direction.left || data->direction.right || data->direction.down) && check != 0)
     {
         data->moves_counter++;
         ft_printf("Move number %d\n", data->moves_counter);
     }
+	printf("up : %d, down : %d, left : %d, right : %d\n", data->direction.up,data->direction.down,data->direction.left,data->direction.right);
+	// animation(data);
     render_map(data);
     return (0);
 }
