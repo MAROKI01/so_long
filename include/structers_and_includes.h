@@ -58,7 +58,6 @@ typedef struct s_dirc
 }t_dirc;
 
 
-
 typedef struct s_sprite
 {
 	t_img *frames;

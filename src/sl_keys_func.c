@@ -11,36 +11,21 @@ int key_press(int keycode, void *param)
 		clean_up(data);
 		exit(0);
 	}
-	if (keycode == XK_a) 
-        data->direction.left = 1;
-    if (keycode == XK_d) 
-        data->direction.right = 1;
-    if (keycode == XK_w) 
-        data->direction.up = 1;
-    if (keycode == XK_s) 
-        data->direction.down = 1;
-
+	data->keys[keycode] = 1;
 	}
 	return (0);
 }
 // keyrealease
 int key_release(int keycode, void *param)
 {
-	t_data *data = (t_data *)param;
-
-	if (keycode >= 0 && keycode < MAX_KEYS)
-	{
-	if (keycode == XK_a) 
-        data->direction.left = 0;
-    if (keycode == XK_d) 
-        data->direction.right = 0;
-    if (keycode == XK_w) 
-        data->direction.up = 0;
-    if (keycode == XK_s) 
-        data->direction.down = 0;
-	}
-	// printf("release ; up : %d, down : %d, left : %d, right : %d\n", data->direction.up,data->direction.down,data->direction.left,data->direction.right);
-	return (0);
+    t_data *data = (t_data *)param;
+	
+    if (keycode >= 0 && keycode < MAX_KEYS)
+    {
+        data->keys[keycode] = 0;
+        printf("Key %d released\n", keycode); // Debug output
+    }
+    return 0;
 }
 
 static int which_object_to_detect_coll(t_data *data, char object, int new_x, int new_y)
@@ -87,13 +72,13 @@ static int check_precise_collision(t_data *data)
 
 	new_y = data->player.p_y;
 	new_x = data->player.p_x;
-	if(data->direction.up)
+	if(data->keys[XK_w])
 		new_y -= PLAYER_STEP;
-	if(data->direction.right)
+	if(data->keys[XK_d])
 		new_x += PLAYER_STEP;
-	if(data->direction.down)
+	if(data->keys[XK_s])
 		new_y += PLAYER_STEP;
-	if(data->direction.left)
+	if(data->keys[XK_a])
 		new_x -= PLAYER_STEP;
     if (which_object_to_detect_coll(data, '1', new_x, new_y))
 		return (0);
@@ -111,27 +96,26 @@ int keys_function(int keycode, void *param)
 {
     t_data *data = (t_data *)param;
     int check;
-	(void)keycode;
-    check = check_precise_collision( data);
+    check = check_precise_collision(data);
     if (keycode == XK_Escape)
     {
         clean_up(data);
         exit(0);
     }
-    if (data->direction.up && check != 0)
+    if (data->keys[XK_w] && check != 0)
         data->player.p_y -= PLAYER_STEP;
-    if (data->direction.right && check != 0)
-        data->player.p_x += PLAYER_STEP;
-    if (data->direction.down && check != 0)
+    if (data->keys[XK_s] && check != 0)
         data->player.p_y += PLAYER_STEP;
-    if (data->direction.left && check != 0)
+    if (data->keys[XK_d] && check != 0)
+        data->player.p_x += PLAYER_STEP;
+    if (data->keys[XK_a] && check != 0)
         data->player.p_x -= PLAYER_STEP;
-    if ((data->direction.up || data->direction.left || data->direction.right || data->direction.down) && check != 0)
+    if ((data->keys[XK_w] || data->keys[XK_d] || data->keys[XK_s] || data->keys[XK_a]) && check != 0)
     {
         data->moves_counter++;
         ft_printf("Move number %d\n", data->moves_counter);
     }
-	printf("up : %d, down : %d, left : %d, right : %d\n", data->direction.up,data->direction.down,data->direction.left,data->direction.right);
+	printf("up : %d, down : %d, left : %d, right : %d\n", data->keys[XK_w], data->keys[XK_d],data->keys[XK_s],data->keys[XK_a]);
 	// animation(data);
     render_map(data);
     return (0);
