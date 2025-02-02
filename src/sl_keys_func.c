@@ -4,15 +4,15 @@ int key_press(int keycode, void *param)
 {
 	t_data *data = (t_data *)param;
 
-	if (keycode >= 0 && keycode < MAX_KEYS)
-	{
 	if (keycode == XK_Escape)
 	{
 		clean_up(data);
 		exit(0);
 	}
+	if (keycode >= 0 && keycode < MAX_KEYS)
+	{
 	data->keys[keycode] = 1;
-    printf("Key %d pressed : %d\n", keycode,data->keys[keycode]); // Debug output
+    // printf("Key %d pressed : %d\n", keycode,data->keys[keycode]); // Debug output
 	}
 	return (0);
 }
@@ -24,7 +24,7 @@ int key_release(int keycode, void *param)
     if (keycode >= 0 && keycode < MAX_KEYS)
     {
         data->keys[keycode] = 0;
-        printf("Key %d released : %d\n", keycode,data->keys[keycode]); // Debug output
+        // printf("Key %d released : %d\n", keycode,data->keys[keycode]); // Debug output
     }
     return 0;
 }
@@ -104,7 +104,7 @@ int keys_function(void *param)
     //     clean_up(data);
     //     exit(0);
     // }
-	printf("up : %d, down : %d, left : %d, right : %d\n", data->keys[XK_w], data->keys[XK_d],data->keys[XK_s],data->keys[XK_a]);
+	// printf("up : %d, down : %d, left : %d, right : %d\n", data->keys[XK_w], data->keys[XK_d],data->keys[XK_s],data->keys[XK_a]);
     if (data->keys[XK_w] && check != 0)
         data->player.p_y -= PLAYER_STEP;
     if (data->keys[XK_s] && check != 0)

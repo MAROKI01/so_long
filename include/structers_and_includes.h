@@ -20,6 +20,10 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+enum state {
+	idle,
+	wld1
+};
 
 typedef struct s_img
 {
@@ -68,7 +72,9 @@ typedef struct s_sprite
 
 typedef struct s_object_sprites
 {
-	t_sprite player;
+	t_sprite player_idle;
+	t_sprite player_wld1;
+
 } t_object_sprites;
 
 typedef struct s_data {

@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 18:07:46 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/19 14:51:18 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:02:50 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	ft_putnbr(long n, int *count);
 void	ft_putnbr_unsigned(unsigned int n, int *count);
 void	ft_putnbr_hex_lower(unsigned int nbr, int *count);
 void	ft_putnbr_hex_upper(unsigned int nbr, int *count);
-
+int ft_sprintf(char *buffer, const char *format, ...);
 #endif
