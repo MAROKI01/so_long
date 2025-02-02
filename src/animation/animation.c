@@ -9,9 +9,9 @@ int animation(t_data *data)
 
 	while (i < 11 && data->objects.player.frames[i].ptr)
 	{
-		usleep(50000);
 		render_map(data);
 		render_player(data, &data->objects.player.frames[i], data->player.p_x, data->player.p_y);
+		usleep(10000);
 		// ft_printf("test %d", i);
 		i++;
 	}

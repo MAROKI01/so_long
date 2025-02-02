@@ -40,5 +40,6 @@ int main(int ac, char **av)
 		return (1);
 	}
 	init_game(av[1]);
+	
 	return (0);
 }

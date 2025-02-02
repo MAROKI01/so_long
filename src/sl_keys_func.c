@@ -12,6 +12,7 @@ int key_press(int keycode, void *param)
 		exit(0);
 	}
 	data->keys[keycode] = 1;
+    printf("Key %d pressed : %d\n", keycode,data->keys[keycode]); // Debug output
 	}
 	return (0);
 }
@@ -23,7 +24,7 @@ int key_release(int keycode, void *param)
     if (keycode >= 0 && keycode < MAX_KEYS)
     {
         data->keys[keycode] = 0;
-        printf("Key %d released\n", keycode); // Debug output
+        printf("Key %d released : %d\n", keycode,data->keys[keycode]); // Debug output
     }
     return 0;
 }
@@ -92,16 +93,18 @@ static int check_precise_collision(t_data *data)
     return (-1);
 }
 
-int keys_function(int keycode, void *param)
+int keys_function(void *param)
 {
     t_data *data = (t_data *)param;
     int check;
+
     check = check_precise_collision(data);
-    if (keycode == XK_Escape)
-    {
-        clean_up(data);
-        exit(0);
-    }
+    // if (keycode == XK_Escape)
+    // {
+    //     clean_up(data);
+    //     exit(0);
+    // }
+	printf("up : %d, down : %d, left : %d, right : %d\n", data->keys[XK_w], data->keys[XK_d],data->keys[XK_s],data->keys[XK_a]);
     if (data->keys[XK_w] && check != 0)
         data->player.p_y -= PLAYER_STEP;
     if (data->keys[XK_s] && check != 0)
@@ -115,9 +118,8 @@ int keys_function(int keycode, void *param)
         data->moves_counter++;
         ft_printf("Move number %d\n", data->moves_counter);
     }
-	printf("up : %d, down : %d, left : %d, right : %d\n", data->keys[XK_w], data->keys[XK_d],data->keys[XK_s],data->keys[XK_a]);
-	// animation(data);
     render_map(data);
+	animation(data);
     return (0);
 }
 

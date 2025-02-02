@@ -12,7 +12,7 @@ t_img	new_file_img(char *path, t_data data);
 /*func to handle keys*/
 int key_press(int keycode, void *data);
 int key_release(int keycode, void *data);
-int keys_function(int keycode, void *param);
+int keys_function(void *param);
 
 /*helper functions*/
 void init_player_pos(t_data *data);

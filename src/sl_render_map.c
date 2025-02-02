@@ -29,7 +29,7 @@ static void render_game_object(t_data *data, int x, int y)
         render_walls(data, x, y);
     else if (data->grid[y][x] == 'C')
         render_tile(data, &data->collect, x, y);
-    render_player(data, &data->player, data->player.p_x, data->player.p_y);
+    // render_player(data, &data->player, data->player.p_x, data->player.p_y);
 	if (data->grid[y][x] == 'E')
 	{
 		if (data->is_exit_open == 0)
