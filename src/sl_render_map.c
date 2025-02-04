@@ -1,6 +1,6 @@
 #include "../include/so_long_utils.h"
 
-static int create_background(t_data *data)
+int create_background(t_data *data)
 {
     data->background.ptr = mlx_new_image(data->mlx, 
         data->width * data->img_size, 

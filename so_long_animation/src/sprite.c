@@ -1,5 +1,6 @@
 #include "../include/utils.h"
 #include "../include/sprite.h"
+#include "../../include/so_long_utils.h"
 
 t_sprite	new_sprite_anim(char * name, char * file_path, t_win * win) {
 	t_img	img;
@@ -9,11 +10,11 @@ t_sprite	new_sprite_anim(char * name, char * file_path, t_win * win) {
 		ft_strdup(file_path), img, img.w, img.h, 0};
 }
 
-void	add_frame_anim(t_animation * a, t_sprite s, sprite_slice slice) {
+void	add_frame_anim(t_data *data, t_animation * a, t_sprite s, sprite_slice slice) {
 	t_img *	frame;
 	int i, j;
-
-	frame = (t_img *)calloc(sizeof(t_img), 1);
+	(void)data;
+	frame = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!frame)
 		return ;
 	*frame = new_img_anim(slice.width, slice.height, s.sprite_img.win);
@@ -30,17 +31,17 @@ void	add_frame_anim(t_animation * a, t_sprite s, sprite_slice slice) {
 	ft_lstadd_back(&a->frames, ft_lstnew(frame));
 }
 
-t_animation *	slice_sprite_anim(t_sprite s, sprite_slice slice, int frames, int delay, enum entity e) {
+t_animation *	slice_sprite_anim(t_data *data, t_sprite s, sprite_slice slice, int frames, int delay, enum entity e) {
 	int i;
 	t_animation *	a;
 
-	a = (t_animation *)calloc(sizeof(t_animation), 1);
+	a = (t_animation *)ft_calloc(sizeof(t_animation), 1);
 	if (!a)
 		return NULL;
 	*a = (t_animation){NULL, slice.width, slice.height, delay, 0, 0, 0, 0, e};
 	i = 0;
 	while (i < frames) {
-		add_frame_anim(a, s, slice);
+		add_frame_anim(data, a, s, slice);
 		slice.x += slice.width;
 		if (slice.x >= s.width) {
 			slice.x = 0;

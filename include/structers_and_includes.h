@@ -99,7 +99,15 @@ typedef struct s_digits
 
 // } t_object_sprites;
 
-
+typedef struct s_sprite {
+	t_list	* animations;
+	char	* name;
+	char	* file_path;
+	t_img	sprite_img;
+	int	width;
+	int	height;
+	int	z_index;
+}		t_sprite;
 
 typedef struct s_data {
 	t_win	window;
@@ -123,6 +131,7 @@ typedef struct s_data {
 	int		is_exit_open;
 	int		total_coins;
 	struct s_digits digits;
+	t_sprite sprite;
 	// t_dirc direction;
 	// t_object_sprites objects;
 } t_data;

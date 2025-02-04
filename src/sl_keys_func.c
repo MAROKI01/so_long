@@ -119,8 +119,7 @@ int keys_function(void *param)
         ft_printf("Move number %d\n", data->moves_counter);
     }
     render_map(data);
-	// animation(data);
-	animate(data);
+	// animate(data);
     return (0);
 }
 

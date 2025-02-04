@@ -8,7 +8,7 @@ static int handle_close(t_data *data)
 }
 void manage_hooks(t_data *data)
 {
-	mlx_loop_hook(data->mlx, &keys_function, data);
+	mlx_loop_hook(data->mlx, &animate, data);
     mlx_hook(data->win, KeyPress, KeyPressMask, &key_press, data);
     mlx_hook(data->win, KeyRelease, KeyReleaseMask, &key_release, data);
 	// mlx_key_hook(data->win, &keys_function, data);

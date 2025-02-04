@@ -8,8 +8,8 @@ unsigned int get_pixel_img(t_img src, int x, int y)
 //function to put pixel
 void put_pixel_img(t_img *dest, int pixel, int x, int y)
 {
-	if (pixel == (int)0xFF000000)
-		return ;
+	if (pixel == (int)0xFF000000 || pixel == (int)0x00000000)
+		return;
 	*(unsigned int *)(dest->addr + (y * dest->line_length) + (x * dest->bpp / 8)) = pixel;
 }
 //function to put img to img
