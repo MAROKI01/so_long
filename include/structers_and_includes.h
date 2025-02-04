@@ -26,18 +26,39 @@ enum state {
 	up
 };
 
+// typedef struct s_img
+// {
+// 		void	*addr;
+// 		void	*ptr;
+// 		int		line_length;
+// 		int		bpp;
+// 		int		endian;
+// 		int		w;
+// 		int		h;
+// 		int 	p_x;
+// 		int		p_y;
+// } t_img;
+typedef struct s_win
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		width;	
+	int		height;	
+}		t_win;
+
 typedef struct s_img
 {
-		void	*addr;
-		void	*ptr;
-		int		line_length;
-		int		bpp;
-		int		endian;
-		int		w;
-		int		h;
-		int 	p_x;
-		int		p_y;
-} t_img;
+	t_win	win;
+	void	*ptr;
+	char	*addr;
+	int		h;
+	int		w;
+	int		bpp;
+	int		endian;
+	int		line_length;
+	int 	p_x;
+	int		p_y;
+}		t_img;
 
 typedef struct s_digits
 {
@@ -54,32 +75,34 @@ typedef struct s_digits
 	t_img	move_n;
 }t_digits;
 
-typedef struct s_dirc
-{
-	int left;
-	int right;
-	int up;
-	int down;
-}t_dirc;
+// typedef struct s_dirc
+// {
+// 	int left;
+// 	int right;
+// 	int up;
+// 	int down;
+// }t_dirc;
+
+// typedef struct s_sprite
+// {
+// 	t_img *frames;
+// 	int frame_count;
+//     int current_frame; 
+// 	int total_frames;
+// } t_sprite;
+
+// typedef struct s_object_sprites
+// {
+// 	t_sprite player_idle;
+// 	t_sprite player_up;
+// 	t_sprite player_right;
+
+// } t_object_sprites;
 
 
-typedef struct s_sprite
-{
-	t_img *frames;
-	int frame_count;
-    int current_frame; 
-	int total_frames;
-} t_sprite;
-
-typedef struct s_object_sprites
-{
-	t_sprite player_idle;
-	t_sprite player_up;
-	t_sprite player_right;
-
-} t_object_sprites;
 
 typedef struct s_data {
+	t_win	window;
     void    *mlx;
     void    *win;
 	char    **grid;  
@@ -100,8 +123,8 @@ typedef struct s_data {
 	int		is_exit_open;
 	int		total_coins;
 	struct s_digits digits;
-	t_dirc direction;
-	t_object_sprites objects;
+	// t_dirc direction;
+	// t_object_sprites objects;
 } t_data;
 
 #endif

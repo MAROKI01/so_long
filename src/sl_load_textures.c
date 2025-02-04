@@ -24,5 +24,5 @@ void load_textures(t_data *data)
     data->digits.move_n = new_file_img("textures/digits/move_n.xpm",*data);
     data->enemy = new_file_img("textures/enemy.xpm",*data);
 
-	load_frames(data);
+	// load_frames(data);
 }

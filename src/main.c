@@ -24,6 +24,11 @@ int init_game(char *data_file)
         clean_up(&data);
         return (0);
     }
+	data.window.win_ptr = data.win;
+	data.window.mlx_ptr = data.mlx;
+	data.window.width = data.width;
+	data.window.height = data.height;
+	// animate(&data);
     load_textures(&data);
 	init_player_pos(&data);
     render_map(&data);

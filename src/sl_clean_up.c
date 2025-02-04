@@ -24,26 +24,26 @@ void free_numbers(t_data *data)
 			mlx_destroy_image(data->mlx, data->digits.move_n.ptr);
 }
 
-void free_sprites(t_data *data)
-{
-	int i;
+// void free_sprites(t_data *data)
+// {
+// 	int i;
 
-	i = 0;
-	while (i < 11)
-	{
-		if (data->objects.player_right.frames[i].ptr)
-			mlx_destroy_image(data->mlx, data->objects.player_right.frames[i].ptr);
-		if (data->objects.player_up.frames[i].ptr)
-			mlx_destroy_image(data->mlx, data->objects.player_up.frames[i].ptr);
-		i++;
-	}
-	while (i < 25)
-	{
-		if (data->objects.player_idle.frames[i].ptr)
-			mlx_destroy_image(data->mlx, data->objects.player_idle.frames[i].ptr);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < 11)
+// 	{
+// 		if (data->objects.player_right.frames[i].ptr)
+// 			mlx_destroy_image(data->mlx, data->objects.player_right.frames[i].ptr);
+// 		if (data->objects.player_up.frames[i].ptr)
+// 			mlx_destroy_image(data->mlx, data->objects.player_up.frames[i].ptr);
+// 		i++;
+// 	}
+// 	while (i < 25)
+// 	{
+// 		if (data->objects.player_idle.frames[i].ptr)
+// 			mlx_destroy_image(data->mlx, data->objects.player_idle.frames[i].ptr);
+// 		i++;
+// 	}
+// }
 
 void free_images(t_data *data)
 {
@@ -83,8 +83,8 @@ void	clean_up(t_data *data)
 	if (data->mlx)
 		free_images(data);
 
-	if (data->mlx)
-		free_sprites(data);
+	// if (data->mlx)
+	// 	free_sprites(data);
 	
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
