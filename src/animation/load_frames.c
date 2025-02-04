@@ -5,16 +5,16 @@ void load_wld1(t_data *data)
 	int i;
 
 	i = 0;
-	data->objects.player_wld1.frames = NULL;
-	data->objects.player_wld1.total_frames = 11;
-	data->objects.player_wld1.frames = malloc(sizeof(t_img) * 11);
-	if (!data->objects.player_wld1.frames)
+	data->objects.player_up.frames = NULL;
+	data->objects.player_up.total_frames = 11;
+	data->objects.player_up.frames = malloc(sizeof(t_img) * 11);
+	if (!data->objects.player_up.frames)
 		return;
 	while (i < 11) {
     char filename[256];
     ft_sprintf(filename,"textures/sprites/wld1/%d.xpm",i + 1);
 	printf("file name : %s\n", filename);
-    data->objects.player_wld1.frames[i] = new_file_img(filename, *data);
+    data->objects.player_up.frames[i] = new_file_img(filename, *data);
 	i++;
 	}
 }
@@ -37,6 +37,25 @@ void load_idle(t_data *data)
 	i++;
 	}
 }
+
+void load_up(t_data *data)
+{
+	int i;
+
+	i = 0;
+	data->objects.player_up.frames = NULL;
+	data->objects.player_up.total_frames = 11;
+	data->objects.player_up.frames = malloc(sizeof(t_img) * 11);
+	if (!data->objects.player_up.frames)
+		return;
+	while (i < data->objects.player_up.total_frames) {
+    char filename[256];
+    ft_sprintf(filename,"textures/sprites/up/%d.xpm",i + 1);
+	printf("file name : %s\n", filename);
+    data->objects.player_up.frames[i] = new_file_img(filename, *data);
+	i++;
+	}
+}
 void load_frames(t_data *data)
 {
 	if (!data)
@@ -44,5 +63,5 @@ void load_frames(t_data *data)
 	
 	load_wld1(data);
 	load_idle(data);
-	
+	load_up(data);
 }

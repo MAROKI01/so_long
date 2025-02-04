@@ -22,7 +22,8 @@
 
 enum state {
 	idle,
-	wld1
+	right,
+	up
 };
 
 typedef struct s_img
@@ -73,7 +74,8 @@ typedef struct s_sprite
 typedef struct s_object_sprites
 {
 	t_sprite player_idle;
-	t_sprite player_wld1;
+	t_sprite player_up;
+	t_sprite player_right;
 
 } t_object_sprites;
 

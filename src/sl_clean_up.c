@@ -31,8 +31,16 @@ void free_sprites(t_data *data)
 	i = 0;
 	while (i < 11)
 	{
-		if (data->objects.player_wld1.frames[i].ptr)
-			mlx_destroy_image(data->mlx, data->objects.player_wld1.frames[i].ptr);
+		if (data->objects.player_right.frames[i].ptr)
+			mlx_destroy_image(data->mlx, data->objects.player_right.frames[i].ptr);
+		if (data->objects.player_up.frames[i].ptr)
+			mlx_destroy_image(data->mlx, data->objects.player_up.frames[i].ptr);
+		i++;
+	}
+	while (i < 25)
+	{
+		if (data->objects.player_idle.frames[i].ptr)
+			mlx_destroy_image(data->mlx, data->objects.player_idle.frames[i].ptr);
 		i++;
 	}
 }

@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 
-void state_animation(t_data *data, int state)
+void mov_anim(t_data *data, int move)
 {
 	int i;
 	t_sprite sprite;
@@ -10,10 +10,10 @@ void state_animation(t_data *data, int state)
 	i = 0;
 	if (!data)
 		return;
-	if(state == idle)
-		sprite = data->objects.player_idle;
-	else if (state == wld1)
-		sprite = data->objects.player_wld1;
+	if (move == up)
+		sprite = data->objects.player_up;
+	else if (move == right)
+		sprite = data->objects.player_right;
 
 	while (i < sprite.total_frames && sprite.frames[i].ptr)
 	{
@@ -25,11 +25,32 @@ void state_animation(t_data *data, int state)
 	}
 }
 
+void idle_anim(t_data *data)
+{
+	int i;
+	t_sprite sprite;
+
+	i = 0;
+	if (!data)
+		return;
+	sprite = data->objects.player_idle;
+	while (i < sprite.total_frames && sprite.frames[i].ptr)
+	{
+		usleep(1500);
+		render_player(data, &sprite.frames[i], data->player.p_x, data->player.p_y);
+		// ft_printf("test %d", i);
+		render_map(data);
+		i++;
+	}
+}
+
 int animation(t_data *data)
 {
 	if (data->keys[XK_d])
-		state_animation(data, wld1);
+		mov_anim(data, right);
+	// else if (data->keys[XK_w])
+	// 	mov_anim(data, up);
 	else 
-		state_animation(data, idle);
+		idle_anim(data);
 	return(0);
 }
