@@ -4,8 +4,8 @@
 #define MAX_KEYS 256
 #define BUFFER_SIZE 10
 #define IMG_SIZE 32
-#define PLAYER_H 20
-#define PLAYER_W 20 
+#define PLAYER_H 109
+#define PLAYER_W 109 
 #define PLAYER_STEP 8
 
 #include <X11/X.h>
@@ -26,18 +26,6 @@ enum state {
 	up
 };
 
-// typedef struct s_img
-// {
-// 		void	*addr;
-// 		void	*ptr;
-// 		int		line_length;
-// 		int		bpp;
-// 		int		endian;
-// 		int		w;
-// 		int		h;
-// 		int 	p_x;
-// 		int		p_y;
-// } t_img;
 typedef struct s_win
 {
 	void	*mlx_ptr;
@@ -75,30 +63,6 @@ typedef struct s_digits
 	t_img	move_n;
 }t_digits;
 
-// typedef struct s_dirc
-// {
-// 	int left;
-// 	int right;
-// 	int up;
-// 	int down;
-// }t_dirc;
-
-// typedef struct s_sprite
-// {
-// 	t_img *frames;
-// 	int frame_count;
-//     int current_frame; 
-// 	int total_frames;
-// } t_sprite;
-
-// typedef struct s_object_sprites
-// {
-// 	t_sprite player_idle;
-// 	t_sprite player_up;
-// 	t_sprite player_right;
-
-// } t_object_sprites;
-
 typedef struct s_sprite {
 	t_list	* animations;
 	char	* name;
@@ -108,6 +72,13 @@ typedef struct s_sprite {
 	int	height;
 	int	z_index;
 }		t_sprite;
+
+typedef struct s_game_sprites {
+    t_sprite *up;
+    t_sprite *down;
+    t_sprite *left;
+    t_sprite *right;
+} t_game_sprites;
 
 typedef struct s_data {
 	t_win	window;
@@ -132,8 +103,10 @@ typedef struct s_data {
 	int		total_coins;
 	struct s_digits digits;
 	t_sprite sprite;
-	// t_dirc direction;
-	// t_object_sprites objects;
+	t_sprite current_sprite;
+	t_game_sprites sprites;
+	int total_coins_number;
+	int coin_counter;
 } t_data;
 
 #endif

@@ -28,7 +28,6 @@ int init_game(char *data_file)
 	data.window.mlx_ptr = data.mlx;
 	data.window.width = data.width;
 	data.window.height = data.height;
-	// animate(&data);
     load_textures(&data);
 	init_player_pos(&data);
     render_map(&data);

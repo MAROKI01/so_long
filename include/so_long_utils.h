@@ -51,4 +51,6 @@ void graphic_counter(t_data *data);
 void load_frames(t_data *data);
 int animation(t_data *data);
 int animate(t_data *data);
+int update_animations(void *ptr);
+int init_sprite(t_data *data);
 #endif
