@@ -21,6 +21,7 @@ void init_player_pos(t_data *data)
 		}
 		y++;
 	}
+	data->total_coins_number = object_counter(data, 'C');
 }
 
 int object_counter(t_data *data, char object)

@@ -68,14 +68,28 @@ static int is_colliding_with_object(t_data *data, char object, int new_x, int ne
 
 static void handle_coin_collection(t_data *data, int new_x, int new_y)
 {
-	data->total_coins_number = object_counter(data, 'C');
-	if (is_colliding_with_object(data, 'C', new_x, new_y))
-	{
-		data->coin_counter++;
-		data->grid[(new_y / IMG_SIZE) + 1][(new_x / IMG_SIZE) +1] = '0';
-	} 
-	if (data->total_coins_number == data->coin_counter)
-		data->is_exit_open = 1;
+    // Offsets for the player's collision area
+    int offset_left = 80;
+    int offset_right = 36;
+    int offset_top = 40;
+    int offset_bottom = 52;
+
+    // Compute player's center point using the offsets
+    int center_x = new_x + (offset_left + offset_right) / 2;
+    int center_y = new_y + (offset_top + offset_bottom) / 2;
+    
+    // Calculate grid indices based on center position
+    int grid_x = center_x / IMG_SIZE;
+    int grid_y = center_y / IMG_SIZE;
+
+    // Only count the coin if it hasn't been collected yet.
+    if (data->grid[grid_y][grid_x] == 'C')
+    {
+        data->coin_counter++;
+        data->grid[grid_y][grid_x] = '0';
+    }
+    if (data->total_coins == data->coin_counter)
+        data->is_exit_open = 1;
 }
 
 static int check_precise_collision(t_data *data)
@@ -118,13 +132,36 @@ int keys_function(void *param)
     move_delay = 0;
 
     if (data->keys[XK_w] && check != 0)
+    {
         data->player.p_y -= PLAYER_STEP;
+        data->player.direction = UP;
+        data->current_sprite = data->sprites.up;
+
+    }
     if (data->keys[XK_s] && check != 0)
+    {
         data->player.p_y += PLAYER_STEP;
+        data->player.direction = DOWN;
+        data->current_sprite = data->sprites.down;
+
+    }
     if (data->keys[XK_d] && check != 0)
+    {
         data->player.p_x += PLAYER_STEP;
+        data->player.direction = RIGHT;
+        data->current_sprite = data->sprites.right;
+    }
     if (data->keys[XK_a] && check != 0)
+    {
         data->player.p_x -= PLAYER_STEP;
+        data->player.direction = LEFT;
+        data->current_sprite = data->sprites.left;
+    }
+    if (!data->keys[XK_w] && !data->keys[XK_d] && !data->keys[XK_s] && !data->keys[XK_a])
+    {
+        data->player.direction = IDLE;
+        data->current_sprite = data->sprites.idle;
+    }
     if ((data->keys[XK_w] || data->keys[XK_d] || data->keys[XK_s] || data->keys[XK_a]) && check != 0)
     {
         data->moves_counter++;

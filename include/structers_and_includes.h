@@ -20,11 +20,13 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-enum state {
-	idle,
-	right,
-	up
-};
+typedef enum e_direction {
+    IDLE,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+} t_direction;
 
 typedef struct s_win
 {
@@ -46,6 +48,7 @@ typedef struct s_img
 	int		line_length;
 	int 	p_x;
 	int		p_y;
+	int		direction;
 }		t_img;
 
 typedef struct s_digits
@@ -74,10 +77,13 @@ typedef struct s_sprite {
 }		t_sprite;
 
 typedef struct s_game_sprites {
-    t_sprite *up;
-    t_sprite *down;
-    t_sprite *left;
-    t_sprite *right;
+    t_sprite up;
+    t_sprite down;
+    t_sprite left;
+    t_sprite right;
+	t_sprite idle;
+	t_sprite coin;
+	t_sprite enemy;
 } t_game_sprites;
 
 typedef struct s_data {

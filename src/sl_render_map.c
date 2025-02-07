@@ -27,8 +27,8 @@ static void render_game_object(t_data *data, int x, int y)
 {
     if (data->grid[y][x] == '1')
         render_walls(data, x, y);
-    else if (data->grid[y][x] == 'C')
-        render_tile(data, &data->collect, x, y);
+    // else if (data->grid[y][x] == 'C')
+    //     render_tile(data, &data->collect, x, y);
     // render_player(data, &data->player, data->player.p_x, data->player.p_y);
 	if (data->grid[y][x] == 'E')
 	{
@@ -37,8 +37,8 @@ static void render_game_object(t_data *data, int x, int y)
 		else
         	render_tile(data, &data->exit_open, x, y);
 	}
-	if (data->grid[y][x] == 'A')
-		render_tile(data, &data->enemy, x, y);
+	// if (data->grid[y][x] == 'A')
+	// 	render_tile(data, &data->enemy, x, y);
 }
 
 static int render_grid(t_data *data)

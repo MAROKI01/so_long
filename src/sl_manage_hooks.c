@@ -10,7 +10,7 @@ static int handle_close(t_data *data)
 
 void manage_hooks(t_data *data)
 {
-	if (init_sprite(data))
+	if (intialize_animations(data))
     {
         printf("Failed to initialize sprite.\n");
         return;
