@@ -1,4 +1,18 @@
 #include "../include/so_long_utils.h"
+typedef struct s_collision_box
+{
+    int	offset_left;
+    int	offset_right;
+    int	offset_top;
+    int	offset_bottom;
+    int	col_x;
+    int	col_y;
+    int	col_w;
+    int	col_h;
+    int center_y;
+    int center_x;
+    int	sample_step;
+}				t_collision_box;
 
 int key_press(int keycode, void *param)
 {
@@ -12,7 +26,6 @@ int key_press(int keycode, void *param)
 	if (keycode >= 0 && keycode < MAX_KEYS)
 	{
 	data->keys[keycode] = 1;
-    // printf("Key %d pressed : %d\n", keycode,data->keys[keycode]); // Debug output
 	}
 	return (0);
 }
@@ -24,65 +37,67 @@ int key_release(int keycode, void *param)
     if (keycode >= 0 && keycode < MAX_KEYS)
     {
         data->keys[keycode] = 0;
-        // printf("Key %d released : %d\n", keycode,data->keys[keycode]); // Debug output
     }
     return 0;
 }
-
-static int is_colliding_with_object(t_data *data, char object, int new_x, int new_y)
+static int	check_cell(t_data *data, char object, int x, int y)
 {
-    // These offsets remove extra margins in the image:
-    int offset_left = 41;
-    int offset_right = 36;
-    int offset_top = 40;
-    int offset_bottom = 52;
-    
-    // Define the collision box within the sprite:
-    int col_x = new_x + offset_left;
-    int col_y = new_y + offset_top;
-    int col_w = PLAYER_W - (offset_left + offset_right);
-    int col_h = PLAYER_H - (offset_top + offset_bottom);
-    
-    // Choose a small step to sample across the entire collision box.
-    int sample_step = 4;  // Adjust based on precision and performance
+    int	grid_x;
+    int	grid_y;
 
-    // Loop over the collision box region.
-    for (int y = col_y; y < col_y + col_h; y += sample_step)
-    {
-        for (int x = col_x; x < col_x + col_w; x += sample_step)
-        {
-            int grid_x = x / IMG_SIZE;
-            int grid_y = y / IMG_SIZE;
-            
-            // Check if indices are within grid bounds.
-            if (grid_y < 0 || grid_y >= data->height ||
-                grid_x < 0 || grid_x >= data->width)
-                continue;
-            
-            if (data->grid[grid_y][grid_x] == object)
-                return 1;
-        }
-    }
-    return 0;
+    grid_x = x / IMG_SIZE;
+    grid_y = y / IMG_SIZE;
+    if (grid_y < 0 || grid_y >= data->height || grid_x < 0 ||
+        grid_x >= data->width)
+        return (0);
+    if (data->grid[grid_y][grid_x] == object)
+        return (1);
+    return (0);
 }
+static int	is_colliding_with_object(t_data *data, char object, int new_x, int new_y)
+{
+    t_collision_box box;
+    int	x;
+    int	y;
+
+    box.offset_left = 41;
+    box.offset_right = 36;
+    box.offset_top = 40;
+    box.offset_bottom = 52;
+    box.col_x = new_x + box.offset_left;
+    box.col_y = new_y + box.offset_top;
+    box.col_w = PLAYER_W - (box.offset_left + box.offset_right);
+    box.sample_step = 4;
+    y = box.col_y;
+    while (y < box.col_y + PLAYER_H - (box.offset_top + box.offset_bottom))
+    {
+        x = box.col_x;
+        while (x < box.col_x + box.col_w)
+        {
+            if (check_cell(data, object, x, y))
+                return (1);
+            x += box.sample_step;
+        }
+        y += box.sample_step;
+    }
+    return (0);
+}
+
 
 static void handle_coin_collection(t_data *data, int new_x, int new_y)
 {
-    // Offsets for the player's collision area
-    int offset_left = 80;
-    int offset_right = 36;
-    int offset_top = 40;
-    int offset_bottom = 52;
+    t_collision_box box;
+    int grid_y;
+    int grid_x;
 
-    // Compute player's center point using the offsets
-    int center_x = new_x + (offset_left + offset_right) / 2;
-    int center_y = new_y + (offset_top + offset_bottom) / 2;
-    
-    // Calculate grid indices based on center position
-    int grid_x = center_x / IMG_SIZE;
-    int grid_y = center_y / IMG_SIZE;
-
-    // Only count the coin if it hasn't been collected yet.
+    box.offset_left = 80;
+    box.offset_right = 36;
+    box.offset_top = 40;
+    box.offset_bottom = 52;
+    box.center_x = new_x + (box.offset_left + box.offset_right) / 2;
+    box.center_y = new_y + (box.offset_top + box.offset_bottom) / 2;
+    grid_x = box.center_x / IMG_SIZE;
+    grid_y = box.center_y / IMG_SIZE;
     if (data->grid[grid_y][grid_x] == 'C')
     {
         data->coin_counter++;
@@ -118,32 +133,21 @@ static int check_precise_collision(t_data *data)
 	 }
     return (-1);
 }
+// ...existing includes and code...
 
-int keys_function(void *param)
+static void update_movement_keys(t_data *data, int check)
 {
-    t_data *data = (t_data *)param;
-    int check;
-    static int move_delay = 0; // simple counter for movement delay
-
-    check = check_precise_collision(data);
-
-	if (++move_delay < 10000) // adjust 10 to the desired delay frames
-        return (0);
-    move_delay = 0;
-
     if (data->keys[XK_w] && check != 0)
     {
         data->player.p_y -= PLAYER_STEP;
         data->player.direction = UP;
         data->current_sprite = data->sprites.up;
-
     }
     if (data->keys[XK_s] && check != 0)
     {
         data->player.p_y += PLAYER_STEP;
         data->player.direction = DOWN;
         data->current_sprite = data->sprites.down;
-
     }
     if (data->keys[XK_d] && check != 0)
     {
@@ -157,19 +161,41 @@ int keys_function(void *param)
         data->player.direction = LEFT;
         data->current_sprite = data->sprites.left;
     }
-    if (!data->keys[XK_w] && !data->keys[XK_d] && !data->keys[XK_s] && !data->keys[XK_a])
+}
+
+static void update_idle_state(t_data *data)
+{
+    if (!data->keys[XK_w] && !data->keys[XK_d] &&
+        !data->keys[XK_s] && !data->keys[XK_a])
     {
         data->player.direction = IDLE;
         data->current_sprite = data->sprites.idle;
     }
-    if ((data->keys[XK_w] || data->keys[XK_d] || data->keys[XK_s] || data->keys[XK_a]) && check != 0)
+}
+
+static void update_moves_counter(t_data *data, int check)
+{
+    if ((data->keys[XK_w] || data->keys[XK_d] ||
+         data->keys[XK_s] || data->keys[XK_a]) && check != 0)
     {
         data->moves_counter++;
         ft_printf("Move number %d\n", data->moves_counter);
     }
-    // render_map(data);
-	// animate(data);
-	// mlx_loop(data->mlx);
-    return (0);
 }
 
+int keys_function(void *param)
+{
+    t_data *data = (t_data *)param;
+    int check;
+    static int move_delay = 0; // simple counter for movement delay
+
+    check = check_precise_collision(data);
+    if (++move_delay < 10000) // adjust delay frames here
+        return (0);
+    move_delay = 0;
+
+    update_movement_keys(data, check);
+    update_idle_state(data);
+    update_moves_counter(data, check);
+    return (0);
+}

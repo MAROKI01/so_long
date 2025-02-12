@@ -20,6 +20,13 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+typedef	struct sprite_slice {
+	int x;
+	int y;
+	int width;
+	int height;
+}	sprite_slice;
+
 typedef enum e_direction {
     IDLE,
     UP,
@@ -108,7 +115,6 @@ typedef struct s_data {
 	int		is_exit_open;
 	int		total_coins;
 	struct s_digits digits;
-	t_sprite sprite;
 	t_sprite current_sprite;
 	t_game_sprites sprites;
 	int total_coins_number;

@@ -76,7 +76,7 @@ static void	process_player_animation_frame(t_data *data, t_animation *a)
         data->background.ptr, 0, 0);
 }
 
-static int	update_animations(void *ptr)
+ int	update_animations(void *ptr)
 {
     t_data		*data;
     t_list		*animation_node;
@@ -96,36 +96,40 @@ static int	update_animations(void *ptr)
     return (0);
 }
 
-static t_sprite init_sprite(t_data *data, char *name, char *file_path, int frames, int width, int height)
+ t_sprite init_sprite(t_data *data, char *file_path, int frames,sprite_slice slice)
 {
     t_win tutorial;
     t_sprite s1;
     sprite_slice slice1;
 
     tutorial = data->window;
-    s1 = new_sprite_anim(name, file_path, &tutorial);
+    s1 = new_sprite_anim("sprite", file_path, &tutorial);
     if (!s1.sprite_img.ptr) {
         destroy_sprite_anim(s1);
         destroy_window_anim(tutorial);
         return (s1);
     }
-    slice1 = (sprite_slice){0, 0, width, height};
+    slice1 = (sprite_slice)slice;
     ft_lstadd_back(&s1.animations, ft_lstnew(slice_sprite_anim(data, s1, slice1, frames, 10000, PLAYER)));
     printf("Sprite %s [%d %d], loaded %d animations\n", s1.name, s1.width, s1.height, ft_lstsize(s1.animations));
-    data->sprite = s1;
     return (s1);
 }
 
-static int intialize_animations(t_data *data)
+ int intialize_animations(t_data *data)
 {
+    sprite_slice player_slice;
+    sprite_slice object_slice;;
+
+    player_slice = (sprite_slice){0,0,109,109};
+    object_slice = (sprite_slice){0,0,32,32};
     data->player.direction = LEFT;
-    data->sprites.right = init_sprite(data, "right", "sprite_right.xpm",11,109,109);
-    data->sprites.left = init_sprite(data, "left", "sprite_left.xpm",11,109,109);
-    data->sprites.up = init_sprite(data, "up", "sprite_up.xpm",11,109,109);
-    data->sprites.down = init_sprite(data, "down", "sprite_down.xpm",11,109,109);
-    data->sprites.idle = init_sprite(data, "idle", "sprite_idle.xpm",25,109,109);
-    data->sprites.coin = init_sprite(data, "coin", "coin.xpm",9,32,32);
-    data->sprites.enemy = init_sprite(data, "enemy", "sprite_enemy2.xpm",12,32,32);
+    data->sprites.right = init_sprite(data,"textures/sprites/sprite_right.xpm",11,player_slice);
+    data->sprites.left = init_sprite(data,"textures/sprites/sprite_left.xpm",11,player_slice);
+    data->sprites.up = init_sprite(data,"textures/sprites/sprite_up.xpm",11,player_slice);
+    data->sprites.down = init_sprite(data,"textures/sprites/sprite_down.xpm",11,player_slice);
+    data->sprites.idle = init_sprite(data,"textures/sprites/sprite_idle.xpm",25,player_slice);
+    data->sprites.coin = init_sprite(data,"textures/sprites/coin.xpm",9,object_slice);
+    data->sprites.enemy = init_sprite(data,"textures/sprites/sprite_enemy2.xpm",12,object_slice);
     return (0);
 }
 

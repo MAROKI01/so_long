@@ -52,6 +52,6 @@ void load_frames(t_data *data);
 int animation(t_data *data);
 int animate(t_data *data);
 int update_animations(void *ptr);
-t_sprite init_sprite(t_data *data,char *name, char *file_path, int frames, int width, int height);
+t_sprite init_sprite(t_data *data,char *file_path, int frames,sprite_slice slice);
 int intialize_animations(t_data *data);
 #endif
