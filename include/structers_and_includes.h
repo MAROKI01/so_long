@@ -121,4 +121,19 @@ typedef struct s_data {
 	int coin_counter;
 } t_data;
 
+typedef struct s_collision_box
+{
+    int	offset_left;
+    int	offset_right;
+    int	offset_top;
+    int	offset_bottom;
+    int	col_x;
+    int	col_y;
+    int	col_w;
+    int	col_h;
+    int center_y;
+    int center_x;
+    int	sample_step;
+}				t_collision_box;
+
 #endif

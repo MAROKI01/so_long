@@ -1,11 +1,6 @@
 {
-	"files.associations": {
-		"so_long_utils.h": "c",
-		"structers.h": "c",
-		"structers_and_includes.h": "c",
-		"mlx.h": "c",
-		"ft_printf.h": "c",
-		"charconv": "c"
-	},
-	"C_Cpp.errorSquiggles": "enabled"
+    "files.associations": {
+        "so_long_utils.h": "c",
+        "structers_and_includes.h": "c"
+    }
 }

@@ -1,18 +1,4 @@
 #include "../include/so_long_utils.h"
-typedef struct s_collision_box
-{
-    int	offset_left;
-    int	offset_right;
-    int	offset_top;
-    int	offset_bottom;
-    int	col_x;
-    int	col_y;
-    int	col_w;
-    int	col_h;
-    int center_y;
-    int center_x;
-    int	sample_step;
-}				t_collision_box;
 
 int key_press(int keycode, void *param)
 {
@@ -29,7 +15,7 @@ int key_press(int keycode, void *param)
 	}
 	return (0);
 }
-// keyrealease
+
 int key_release(int keycode, void *param)
 {
     t_data *data = (t_data *)param;
@@ -133,7 +119,6 @@ static int check_precise_collision(t_data *data)
 	 }
     return (-1);
 }
-// ...existing includes and code...
 
 static void update_movement_keys(t_data *data, int check)
 {

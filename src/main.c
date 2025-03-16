@@ -52,7 +52,6 @@ int main(int ac, char **av)
 		ft_printf("Error: Please enter a single map.");
 		return (1);
 	}
-
     ft_memset(&data, 0, sizeof(t_data));
     data.mlx = mlx_init();
     if (!data.mlx)
