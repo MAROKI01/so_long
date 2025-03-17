@@ -27,6 +27,9 @@ static void render_game_object(t_data *data, int x, int y)
 {
     if (data->grid[y][x] == '1')
         render_walls(data, x, y);
+    else if (data->grid[y][x] == 'C')
+        render_tile(data, &data->collect, x, y);
+    render_player(data, &data->player, data->player.p_x, data->player.p_y);
 	if (data->grid[y][x] == 'E')
 	{
 		if (data->is_exit_open == 0)
@@ -70,7 +73,6 @@ int render_map(t_data *data)
     
     if (render_grid(data))
         return (1);
-    graphic_counter(data);
     mlx_put_image_to_window(data->mlx, data->win, 
         data->background.ptr, 0, 0);
     return (0);
