@@ -92,7 +92,7 @@ static void	process_player_animation_frame(t_data *data, t_animation *a)
         animation_node = animation_node->next;
     }
     animate_object(data, 'C');
-    animate_object(data, 'A');
+    // animate_object(data, 'A');
     return (0);
 }
 
@@ -137,6 +137,7 @@ int animate(t_data *data)
 {
  	if (!data->window.win_ptr)
         return (2);
+    move_enemies(data);
     keys_function(data);
     update_animations(data);
 	return (0);
