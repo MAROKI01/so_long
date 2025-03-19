@@ -3,6 +3,7 @@
 void	load_textures(t_data *data)
 {
 	srand(time(NULL));
+	initialize_enemies(data);
 	data->img_size = IMG_SIZE;
 	data->front_wall = new_file_img("textures/front wallv2.xpm", *data);
 	data->middle_wall = new_file_img("textures/middle wall.xpm", *data);
@@ -23,5 +24,4 @@ void	load_textures(t_data *data)
 	data->digits.nine = new_file_img("textures/digits/9.xpm", *data);
 	data->digits.move_n = new_file_img("textures/digits/move_n.xpm", *data);
 	data->enemy = new_file_img("textures/enemy.xpm", *data);
-	initialize_enemies(data);
 }

@@ -6,7 +6,7 @@
 # define IMG_SIZE 32
 # define PLAYER_H 109
 # define PLAYER_W 109
-# define PLAYER_STEP 8
+# define PLAYER_STEP 16
 
 # include "ft_printf.h"
 # include "libft.h"
