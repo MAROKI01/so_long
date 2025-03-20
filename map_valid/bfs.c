@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:06:40 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 03:13:55 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:50:16 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,6 @@ static void	cleanup_bfs(t_bfs *data)
 		i++;
 	}
 	free(data->was_visited);
-}
-
-static void	check_current_cell(t_vertex current, char **map, int *collectibles,
-		int *exit_found)
-{
-	if (map[current.y][current.x] == 'C')
-		(*collectibles)++;
-	if (map[current.y][current.x] == 'E')
-		*exit_found = 1;
 }
 
 static void	get_neighbors(int neighbors[4][2])
@@ -107,8 +98,10 @@ void	bfs(t_bfs_params params)
 	while (data.front > data.rear)
 	{
 		current = data.queue[data.rear++];
-		check_current_cell(current, params.map, params.collectibles,
-		params.exit_found);
+		if (params.map[current.y][current.x] == 'C')
+			(*params.collectibles)++;
+		if (params.map[current.y][current.x] == 'E')
+			*params.exit_found = 1;
 		explore_neighbors(&data, current);
 	}
 	cleanup_bfs(&data);

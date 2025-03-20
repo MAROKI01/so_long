@@ -8,7 +8,12 @@
 		"charconv": "c",
 		"array": "c",
 		"string": "c",
-		"string_view": "c"
+		"string_view": "c",
+		"utils.h": "c",
+		"sprite.h": "c",
+		"libft.h": "c",
+		"animation.h": "c",
+		"stdio.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }

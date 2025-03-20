@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:36:30 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 03:04:40 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:02:25 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,5 @@ typedef struct s_bfs
 	int			height;
 	char		**map;
 }				t_bfs;
+
 #endif

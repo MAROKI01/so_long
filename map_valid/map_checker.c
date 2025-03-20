@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:08:34 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 03:08:35 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:51:05 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static int	bfs_checker(t_data *data)
 	int	exit_found;
 
 	bfs((t_bfs_params){data->grid, data->width, data->height,
-			(int)data->player.p_x / IMG_SIZE, (int)data->player.p_y / IMG_SIZE,
-			&collectibles, &exit_found});
+		(int)data->player.p_x / IMG_SIZE, (int)data->player.p_y / IMG_SIZE,
+		&collectibles, &exit_found});
 	if (data->total_coins != collectibles)
 	{
 		printf("Error: The collectibles are not accessible");
@@ -79,6 +79,7 @@ static int	bfs_checker(t_data *data)
 	}
 	return (1);
 }
+
 static int	check_valid_chars(t_data *data)
 {
 	int	i;

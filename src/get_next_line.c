@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 18:06:00 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/20 18:08:16 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_utils.h"
 
 static char	*join_free(char *stock, char *buffer)
@@ -39,7 +51,7 @@ static char	*ft_join(char *stock, int fd)
 	return (stock);
 }
 
-char	*free_if_empty(char *str)
+static char	*free_if_empty(char *str)
 {
 	if (str[0] == '\0')
 	{

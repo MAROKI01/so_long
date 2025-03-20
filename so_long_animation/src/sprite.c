@@ -37,8 +37,8 @@ void	add_frame_anim(t_data *data, t_animation *a, t_sprite s,
 	ft_lstadd_back(&a->frames, ft_lstnew(frame));
 }
 
-t_animation	*slice_sprite_anim(t_data *data, t_sprite s, t_sprite_slice slice,
-		int frames, int delay, enum entity e)
+
+t_animation	*slice_sprite_anim(t_sprite_params params)
 {
 	int			i;
 	t_animation	*a;
@@ -46,16 +46,16 @@ t_animation	*slice_sprite_anim(t_data *data, t_sprite s, t_sprite_slice slice,
 	a = (t_animation *)ft_calloc(sizeof(t_animation), 1);
 	if (!a)
 		return (NULL);
-	*a = (t_animation){NULL, slice.width, slice.height, delay, 0, 0, 0, 0, e};
+	*a = (t_animation){NULL, params.slice.width, params.slice.height, params.delay, 0, 0, 0, 0, params.entity};
 	i = 0;
-	while (i < frames)
+	while (i < params.frames)
 	{
-		add_frame_anim(data, a, s, slice);
-		slice.x += slice.width;
-		if (slice.x >= s.width)
+		add_frame_anim(params.data, a, params.sprite, params.slice);
+		params.slice.x += params.slice.width;
+		if (params.slice.x >= params.sprite.width)
 		{
-			slice.x = 0;
-			slice.y += slice.height;
+			params.slice.x = 0;
+			params.slice.y += params.slice.height;
 		}
 		i++;
 	}

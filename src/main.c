@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 18:06:28 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/20 18:07:13 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_utils.h"
 
 static int	init_map(t_data *data, char *data_file)
@@ -22,9 +34,9 @@ static int	init_player_and_checker(t_data *data)
 static int	create_game_window(t_data *data)
 {
 	data->win = mlx_new_window(data->mlx,
-								data->width * IMG_SIZE,
-								data->height * IMG_SIZE,
-								"So long");
+			data->width * IMG_SIZE,
+			data->height * IMG_SIZE,
+			"So long");
 	if (!data->win)
 	{
 		clean_up(data);

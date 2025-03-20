@@ -1,5 +1,4 @@
 #include "../../include/so_long_utils.h"
-#include "../include/libft.h"
 #include "../include/sprite.h"
 #include "../include/utils.h"
 
@@ -101,6 +100,7 @@ t_sprite	init_sprite(t_data *data, char *file_path, int frames,
 	t_win			tutorial;
 	t_sprite		s1;
 	t_sprite_slice	slice1;
+	t_sprite_params	params;
 
 	tutorial = data->window;
 	s1 = new_sprite_anim("sprite", file_path, &tutorial);
@@ -111,8 +111,13 @@ t_sprite	init_sprite(t_data *data, char *file_path, int frames,
 		return (s1);
 	}
 	slice1 = (t_sprite_slice)slice;
-	ft_lstadd_back(&s1.animations, ft_lstnew(slice_sprite_anim(data, s1, slice1,
-					frames, 10000, PLAYER)));
+	params.data = data;
+	params.sprite = s1;
+	params.slice = slice1;
+	params.frames = frames;
+	params.delay = 10000;
+	params.entity = PLAYER;
+	ft_lstadd_back(&s1.animations, ft_lstnew(slice_sprite_anim(params)));
 	printf("Sprite %s [%d %d], loaded %d animations\n", s1.name, s1.width,
 			s1.height, ft_lstsize(s1.animations));
 	return (s1);

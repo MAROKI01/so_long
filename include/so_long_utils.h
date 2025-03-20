@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:31:55 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 02:52:20 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:19:48 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,12 @@ int				intialize_animations(t_data *data);
 
 void			move_enemies(t_data *data);
 void			initialize_enemies(t_data *data);
+ int	is_valid_move(t_data *data, int new_x, int new_y);
+ void	process_enemy_move(t_data *data, int i, int new_x, int new_y);
+ void	change_enemy_direction(t_data *data, int i);
+ void	calculate_new_position(t_data *data, int i, int *new_x, int *new_y);
+ int	is_player_nearby(t_data *data, int enemy_x, int enemy_y);
+
+void	free_sprites(t_data *data);
+void	free_animation(t_data *data);
 #endif
