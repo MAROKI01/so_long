@@ -28,5 +28,5 @@ void	ft_putnbr(long n, int *count);
 void	ft_putnbr_unsigned(unsigned int n, int *count);
 void	ft_putnbr_hex_lower(unsigned int nbr, int *count);
 void	ft_putnbr_hex_upper(unsigned int nbr, int *count);
-int ft_sprintf(char *buffer, const char *format, ...);
+int		ft_sprintf(char *buffer, const char *format, ...);
 #endif

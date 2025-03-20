@@ -1,9 +1,9 @@
 #include "../include/utils.h"
 
-t_list		*ft_lstget_anim(t_list *lst, int index)
+t_list	*ft_lstget_anim(t_list *lst, int index)
 {
 	t_list	*n;
-	int i;
+	int		i;
 
 	i = 0;
 	n = lst;
@@ -21,10 +21,9 @@ t_list		*ft_lstget_anim(t_list *lst, int index)
 	return (NULL);
 }
 
-
-void	ft_lstiter_param_anim(t_list *lst, void (*f)(void *, void *), void * ptr)
+void	ft_lstiter_param_anim(t_list *lst, void (*f)(void *, void *), void *ptr)
 {
-	t_list	*temp;
+	t_list *temp;
 
 	temp = lst;
 	while (temp != NULL)

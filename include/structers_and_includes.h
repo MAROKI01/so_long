@@ -1,5 +1,17 @@
-#ifndef STRUCTERS_H
-# define STRUCTERS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structers_and_includes.h                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 02:36:30 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/20 03:04:40 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTERS_AND_INCLUDES_H
+# define STRUCTERS_AND_INCLUDES_H
 
 # define MAX_KEYS 256
 # define BUFFER_SIZE 10
@@ -26,7 +38,7 @@ typedef struct sprite_slice
 	int				y;
 	int				width;
 	int				height;
-}					sprite_slice;
+}					t_sprite_slice;
 
 typedef enum e_direction
 {
@@ -119,7 +131,7 @@ typedef struct s_data
 	t_img			front_wall;
 	t_img			middle_wall;
 	t_img			floor;
-	t_img			collect;
+	t_img			shadow;
 	t_img			exit;
 	t_img			exit_open;
 	t_img			player;
@@ -137,4 +149,31 @@ typedef struct s_data
 	int				coin_counter;
 }					t_data;
 
+typedef struct s_vertex
+{
+	int			x;
+	int			y;
+}				t_vertex;
+
+typedef struct s_bfs_params
+{
+	char		**map;
+	int			width;
+	int			height;
+	int			p_x;
+	int			p_y;
+	int			*collectibles;
+	int			*exit_found;
+}				t_bfs_params;
+
+typedef struct s_bfs
+{
+	t_vertex	*queue;
+	int			**was_visited;
+	int			rear;
+	int			front;
+	int			width;
+	int			height;
+	char		**map;
+}				t_bfs;
 #endif

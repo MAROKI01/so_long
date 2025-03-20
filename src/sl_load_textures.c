@@ -8,10 +8,9 @@ void	load_textures(t_data *data)
 	data->front_wall = new_file_img("textures/front wallv2.xpm", *data);
 	data->middle_wall = new_file_img("textures/middle wall.xpm", *data);
 	data->floor = new_file_img("textures/floor.xpm", *data);
-	data->collect = new_file_img("textures/coin.xpm", *data);
+	data->shadow = new_file_img("textures/shadow.xpm", *data);
 	data->exit = new_file_img("textures/exit.xpm", *data);
 	data->exit_open = new_file_img("textures/exit_open.xpm", *data);
-	data->player = new_file_img("textures/player.xpm", *data);
 	data->digits.zero = new_file_img("textures/digits/0.xpm", *data);
 	data->digits.one = new_file_img("textures/digits/1.xpm", *data);
 	data->digits.two = new_file_img("textures/digits/2.xpm", *data);

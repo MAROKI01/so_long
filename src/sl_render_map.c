@@ -28,6 +28,8 @@ static void	render_game_object(t_data *data, int x, int y)
 	{
 		render_walls(data, x, y);
 	}
+	render_player(data, &data->shadow, data->player.p_x + IMG_SIZE + 5,
+			data->player.p_y + IMG_SIZE);
 	if (data->grid[y][x] == 'E')
 	{
 		if (data->is_exit_open == 0)
@@ -58,13 +60,14 @@ static int	render_grid(t_data *data)
 	return (0);
 }
 
-static void render_enemies(t_data *data)
+static void	render_enemies(t_data *data)
 {
-    int i;
-    
-    for (i = 0; i < data->enemy_count; i++) {
-        render_tile(data, &data->enemy, data->enemies[i].x, data->enemies[i].y);
-    }
+	int	i;
+
+	for (i = 0; i < data->enemy_count; i++)
+	{
+		render_tile(data, &data->enemy, data->enemies[i].x, data->enemies[i].y);
+	}
 }
 
 int	render_map(t_data *data)

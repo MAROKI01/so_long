@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_utils.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 02:31:55 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/20 02:52:20 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_UTILS_H
 # define SO_LONG_UTILS_H
 
@@ -39,8 +51,7 @@ void			manage_hooks(t_data *data);
 int				object_counter(t_data *data, char object);
 
 /*parsing map algo*/
-void			bfs(char **map, int width, int height, int p_x, int p_y,
-					int *collectibles, int *exit_found);
+void			bfs(t_bfs_params params);
 int				map_checker(t_data *data);
 int				check_file(char *file);
 
@@ -53,9 +64,9 @@ int				animation(t_data *data);
 int				animate(t_data *data);
 int				update_animations(void *ptr);
 t_sprite		init_sprite(t_data *data, char *file_path, int frames,
-					sprite_slice slice);
+					t_sprite_slice slice);
 int				intialize_animations(t_data *data);
 
-void move_enemies(t_data *data);
-void initialize_enemies(t_data *data);
+void			move_enemies(t_data *data);
+void			initialize_enemies(t_data *data);
 #endif
