@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:02:37 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 00:28:01 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:18:48 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	handle_coin_collection(t_data *data, int new_x, int new_y)
 	int				grid_y;
 	int				grid_x;
 
-	box.offset_left = 80;
-	box.offset_right = 36;
-	box.offset_top = 40;
-	box.offset_bottom = 52;
+	box.offset_left = 60;
+	box.offset_right = 0;
+	box.offset_top = 0;
+	box.offset_bottom = 10;
 	box.center_x = new_x + (box.offset_left + box.offset_right) / 2;
 	box.center_y = new_y + (box.offset_top + box.offset_bottom) / 2;
 	grid_x = box.center_x / IMG_SIZE;

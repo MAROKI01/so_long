@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:31:55 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 01:18:59 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:03:13 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				object_counter(t_data *data, char object);
 void			bfs(t_bfs_params params);
 int				map_checker(t_data *data);
 int				check_file(char *file);
+int				limit_window_size(t_data *data);
 
 /*for the counter*/
 void			graphic_counter(t_data *data);

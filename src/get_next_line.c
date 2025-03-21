@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:06:00 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 02:57:09 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:32:06 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,38 +61,43 @@ static char	*free_if_empty(char *str)
 	return (str);
 }
 
+static char	*process_stock(char **stock)
+{
+	char	*res;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	if ((*stock)[0] == '\n' && (*stock)[1] == '\n')
+	{
+		ft_printf("Error: Empty line in map.\n");
+		free(*stock);
+		*stock = NULL;
+		return (NULL);
+	}
+	if ((*stock)[0] == '\0')
+	{
+		free(*stock);
+		*stock = NULL;
+		return (NULL);
+	}
+	while ((*stock)[i] && (*stock)[i] != '\n')
+		i++;
+	res = ft_substr(*stock, 0, i + 1);
+	temp = ft_substr(*stock, i + 1, ft_strlen(*stock) - i - 1);
+	free(*stock);
+	*stock = free_if_empty(temp);
+	return (res);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*stock;
-	char		*res;
-	char		*temp;
-	int			i;
 
-	i = 0;
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	stock = ft_join(stock, fd);
 	if (!stock)
 		return (NULL);
-	if (stock[0] == '\n' && stock[1] == '\n')
-	{
-		printf("Error: Empty line in map.\n");
-		free(stock);
-		stock = NULL;
-		return (NULL);
-	}
-	if (stock[0] == '\0')
-	{
-		free(stock);
-		stock = NULL;
-		return (NULL);
-	}
-	while (stock[i] && stock[i] != '\n')
-		i++;
-	res = ft_substr(stock, 0, i + 1);
-	temp = ft_substr(stock, i + 1, ft_strlen(stock) - i - 1);
-	free(stock);
-	stock = NULL;
-	stock = free_if_empty(temp);
-	return (res);
+	return (process_stock(&stock));
 }

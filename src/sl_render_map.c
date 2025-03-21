@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:39:27 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 00:57:46 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:02:38 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	render_game_object(t_data *data, int x, int y)
 	{
 		render_walls(data, x, y);
 	}
-	render_player(data, &data->shadow, data->player.p_x + IMG_SIZE + 5,
-		data->player.p_y + IMG_SIZE);
+	render_player(data, &data->shadow, data->player.p_x + 5,
+		data->player.p_y);
 	if (data->grid[y][x] == 'E')
 	{
 		if (data->is_exit_open == 0)

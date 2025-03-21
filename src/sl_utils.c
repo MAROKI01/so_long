@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 01:09:32 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 01:10:15 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:03:44 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,21 @@ int	object_counter(t_data *data, char object)
 		y++;
 	}
 	return (count);
+}
+
+int	limit_window_size(t_data *data)
+{
+	int	max_width;
+	int	max_height;
+
+	max_width = 1920;
+	max_height = 1080;
+	if (data->width * IMG_SIZE > max_width
+		|| data->height * IMG_SIZE > max_height)
+	{
+		ft_printf("Error: Map size exceeds maximum window dimensions.");
+		clean_up(data);
+		exit(1);
+	}
+	return (1);
 }

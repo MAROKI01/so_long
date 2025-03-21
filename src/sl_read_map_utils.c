@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:29:06 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 02:47:26 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:58:48 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	check_line_length(char *line, int width)
 	{
 		len--;
 	}
+	if (len != width)
+		ft_printf("Error: Invalid map dimensions");
 	return (len != width);
 }

@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:28:27 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 00:28:28 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:32:17 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	manage_hooks(t_data *data)
 {
 	if (intialize_animations(data))
 	{
-		printf("Failed to initialize sprite.\n");
+		ft_printf("Failed to initialize sprite.\n");
 		return ;
 	}
 	mlx_loop_hook(data->mlx, &animate, data);

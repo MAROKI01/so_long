@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 01:12:55 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 01:26:59 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:00:23 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	process_player_animation_frame(t_data *data, t_animation *a)
 	a->current_frame_num %= ft_lstsize(a->frames);
 	img = (t_img *)ft_lstget_anim(a->frames, a->current_frame_num)->content;
 	render_map(data);
-	render_player(data, img, data->player.p_x, data->player.p_y);
+	render_player(data, img, data->player.p_x - IMG_SIZE,
+		data->player.p_y - IMG_SIZE);
 	mlx_put_image_to_window(img->win.mlx_ptr, img->win.win_ptr,
 		data->background.ptr, 0, 0);
 }

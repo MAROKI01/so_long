@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:06:28 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 18:07:13 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:03:23 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!init_player_and_checker(&data))
 		return (0);
+	limit_window_size(&data);
 	if (!create_game_window(&data))
 		return (0);
 	setup_game(&data);

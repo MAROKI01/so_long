@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:25:36 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 00:50:19 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:03:54 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	is_colliding_with_object(t_data *data, char object, int new_x,
 	int				x;
 	int				y;
 
-	box.offset_left = 41;
-	box.offset_right = 36;
-	box.offset_top = 40;
-	box.offset_bottom = 52;
+	box.offset_left = 0;
+	box.offset_right = 77;
+	box.offset_top = 0;
+	box.offset_bottom = 90;
 	box.col_x = new_x + box.offset_left;
 	box.col_y = new_y + box.offset_top;
 	box.col_w = PLAYER_W - (box.offset_left + box.offset_right);
@@ -63,6 +63,7 @@ static int	check_precise_collision(t_data *data)
 	if ((is_colliding_with_object(data, 'E', new_x, new_y)
 			&& data->is_exit_open))
 	{
+		ft_printf("You won! Moves: %d\n", data->moves_counter);
 		clean_up(data);
 		exit(0);
 	}

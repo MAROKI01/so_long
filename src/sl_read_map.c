@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:30:15 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 02:31:47 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:01:02 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,16 @@ static int	validate_map_dimensions(t_data *data, char *line, int index)
 static char	**allocate_grid(int height)
 {
 	char	**grid;
-	int i;
+	int		i;
 
 	grid = malloc(sizeof(char *) * (height + 1));
 	if (!grid)
 		return (NULL);
 	i = 0;
 	while (i <= height)
-        grid[i++] = NULL;
+	{
+		grid[i++] = NULL;
+	}
 	return (grid);
 }
 
@@ -73,7 +75,6 @@ static int	populate_grid(t_data *data, char *filename)
 		if (!validate_map_dimensions(data, line, i))
 		{
 			close(fd);
-			printf("Error: Map is not rectangular");
 			free(line);
 			clean_up(data);
 			exit(1);

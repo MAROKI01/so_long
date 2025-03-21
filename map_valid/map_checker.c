@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:08:34 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 02:03:11 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:21:22 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ static int	count_items(t_data *data)
 	player = object_counter(data, 'P');
 	if (data->total_coins == 0)
 	{
-		printf("Error: Too few coins");
+		ft_printf("Error: Too few coins");
 		return (0);
 	}
 	if (exit > 1 || exit == 0)
 	{
-		printf("Error: Map invalid");
+		ft_printf("Error: Map invalid");
 		return (0);
 	}
 	if (player == 0 || player > 1)
 	{
-		printf("Error: Required one player");
+		ft_printf("Error: Required one player");
 		return (0);
 	}
 	return (1);
@@ -69,12 +69,12 @@ static int	bfs_checker(t_data *data)
 		&collectibles, &exit_found});
 	if (data->total_coins != collectibles)
 	{
-		printf("Error: The collectibles are not accessible");
+		ft_printf("Error: The collectibles are not accessible");
 		return (0);
 	}
 	if (!exit_found)
 	{
-		printf("Error: map is not valid");
+		ft_printf("Error: map is not valid");
 		return (0);
 	}
 	return (1);
@@ -95,7 +95,7 @@ static int	check_valid_chars(t_data *data)
 				data->grid[i][j] != 'C' && data->grid[i][j] != 'E' &&
 				data->grid[i][j] != 'P' && data->grid[i][j] != 'A')
 			{
-				printf("Error: Invalid character in map");
+				ft_printf("Error: Invalid character in map");
 				return (0);
 			}
 			j++;
@@ -108,7 +108,10 @@ static int	check_valid_chars(t_data *data)
 int	map_checker(t_data *data)
 {
 	if (!check_valid_chars(data))
-		return (0);
+	{
+		clean_up(data);
+		exit(1);
+	}
 	if (!map_bound_checker(data))
 	{
 		ft_printf("Error: The map is not surrounded by walls");
