@@ -1,107 +1,108 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bfs.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 03:06:40 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/20 17:50:16 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_utils.h"
 
-typedef struct s_vertex
+static void	init_bfs(t_bfs *data, char **map, int width, int height)
 {
-    int x;
-    int y;
-} t_vertex;
-
-int within_the_bounds(int x, int y, int width, int height)
-{
-    return (x >= 0 && y >= 0 && x < width && y < height);
-}
-typedef struct s_bfs
-{
-    t_vertex    *queue;
-    int         **was_visited;
-    int         rear;
-    int         front;
-    int         width;
-    int         height;
-    char        **map;
-}   t_bfs;
-
-static void init_bfs(t_bfs *data, char **map, int width, int height)
-{
-	int i;
+	int	i;
 
 	i = 0;
-    data->queue = malloc(sizeof(t_vertex) * (width * height));
-    data->was_visited = malloc(sizeof(int *) * height);
-    while (i < height)
-    {
-        data->was_visited[i] = malloc(sizeof(int) * width);
-        ft_memset(data->was_visited[i], 0, sizeof(int) * width);
+	data->queue = malloc(sizeof(t_vertex) * (width * height));
+	data->was_visited = malloc(sizeof(int *) * height);
+	while (i < height)
+	{
+		data->was_visited[i] = malloc(sizeof(int) * width);
+		ft_memset(data->was_visited[i], 0, sizeof(int) * width);
 		i++;
-    }
-    data->rear = 0;
-    data->front = 0;
-    data->width = width;
-    data->height = height;
-    data->map = map;
+	}
+	data->rear = 0;
+	data->front = 0;
+	data->width = width;
+	data->height = height;
+	data->map = map;
 }
 
-static void cleanup_bfs(t_bfs *data)
+static void	cleanup_bfs(t_bfs *data)
 {
-    free(data->queue);
-    for (int i = 0; i < data->height; i++)
-        free(data->was_visited[i]);
-    free(data->was_visited);
-}
-
-static void check_current_cell(t_vertex current, char **map, int *collectibles, int *exit_found)
-{
-    if (map[current.y][current.x] == 'C')
-        (*collectibles)++;
-    if (map[current.y][current.x] == 'E')
-        *exit_found = 1;
-}
-
-static void explore_neighbors(t_bfs *data, t_vertex current)
-{
-	int edges[4][2];
-	int i;
+	int	i;
 
 	i = 0;
-	ft_memcpy(edges, (int[4][2]){{-1, 0}, {0, -1}, {1, 0}, {0, 1}}, sizeof(edges));
-    while (i < 4)
-    {
-        int nx = current.x + edges[i][0];
-        int ny = current.y + edges[i][1];
-        if (within_the_bounds(nx, ny, data->width, data->height))
-    	{
-        	if (!data->was_visited[ny][nx] && data->map[ny][nx] != '1')
-        	{
-        	    data->was_visited[ny][nx] = 1;
-         		data->queue[data->front++] = (t_vertex){nx, ny};
-        	}
-   		}
+	free(data->queue);
+	while (i < data->height)
+	{
+		free(data->was_visited[i]);
 		i++;
-    }
+	}
+	free(data->was_visited);
 }
 
-void bfs(char **map, int width, int height, int p_x, int p_y, 
-         int *collectibles, int *exit_found)
+static void	get_neighbors(int neighbors[4][2])
 {
-    t_bfs   data;
-    t_vertex current;
+	neighbors[0][0] = -1;
+	neighbors[0][1] = 0;
+	neighbors[1][0] = 0;
+	neighbors[1][1] = -1;
+	neighbors[2][0] = 1;
+	neighbors[2][1] = 0;
+	neighbors[3][0] = 0;
+	neighbors[3][1] = 1;
+}
 
-    if (!map || !collectibles || !exit_found || 
-        !within_the_bounds(p_x, p_y, width, height))
-        return;
+static void	explore_neighbors(t_bfs *data, t_vertex current)
+{
+	int	neighbors[4][2];
+	int	i;
+	int	nx;
+	int	ny;
 
-    init_bfs(&data, map, width, height);
-    *collectibles = 0;
-    *exit_found = 0;
+	get_neighbors(neighbors);
+	i = 0;
+	while (i < 4)
+	{
+		nx = current.x + neighbors[i][0];
+		ny = current.y + neighbors[i][1];
+		if (nx >= 0 && ny >= 0 && nx < data->width && ny < data->height
+			&& !data->was_visited[ny][nx] && data->map[ny][nx] != '1')
+		{
+			data->was_visited[ny][nx] = 1;
+			data->queue[data->front++] = (t_vertex){nx, ny};
+		}
+		i++;
+	}
+}
 
-    data.queue[data.front++] = (t_vertex){p_x, p_y};
-    data.was_visited[p_y][p_x] = 1;
+void	bfs(t_bfs_params params)
+{
+	t_bfs		data;
+	t_vertex	current;
 
-    while (data.front > data.rear)
-    {
-        current = data.queue[data.rear++];
-        check_current_cell(current, map, collectibles, exit_found);
-        explore_neighbors(&data, current);
-    }
-    cleanup_bfs(&data);
+	if (!params.map || !params.collectibles || !params.exit_found
+		|| !(params.p_x >= 0 && params.p_x < params.width) || !(params.p_y >= 0
+			&& params.p_y < params.height))
+		return ;
+	init_bfs(&data, params.map, params.width, params.height);
+	*(params.collectibles) = 0;
+	*(params.exit_found) = 0;
+	data.queue[data.front++] = (t_vertex){params.p_x, params.p_y};
+	data.was_visited[params.p_y][params.p_x] = 1;
+	while (data.front > data.rear)
+	{
+		current = data.queue[data.rear++];
+		if (params.map[current.y][current.x] == 'C')
+			(*params.collectibles)++;
+		if (params.map[current.y][current.x] == 'E')
+			*params.exit_found = 1;
+		explore_neighbors(&data, current);
+	}
+	cleanup_bfs(&data);
 }
