@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 01:28:19 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/21 01:28:53 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/utils.h"
 
 t_img	new_img_anim(int w, int h, t_win window)
@@ -43,7 +55,7 @@ t_img	new_file_img_anim(char *path, t_win window)
 unsigned int	get_pixel_img_anim(t_img img, int x, int y)
 {
 	return (*(unsigned int *)((img.addr + (y * img.line_length) + (x * img.bpp
-					/ 8))));
+				/ 8))));
 }
 
 void	destroy_image_anim(t_img img)

@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:08:34 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 17:51:05 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 02:03:11 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,18 @@ int	map_checker(t_data *data)
 	if (!map_bound_checker(data))
 	{
 		ft_printf("Error: The map is not surrounded by walls");
+		clean_up(data);
 		return (0);
 	}
 	if (!count_items(data))
-		return (0);
+	{
+		clean_up(data);
+		exit(1);
+	}
 	if (!bfs_checker(data))
-		return (0);
+	{
+		clean_up(data);
+		exit(1);
+	}
 	return (1);
 }

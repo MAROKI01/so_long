@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 01:29:06 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/21 01:30:43 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/so_long_utils.h"
 #include "../include/sprite.h"
 #include "../include/utils.h"
@@ -15,8 +27,9 @@ void	add_frame_anim(t_data *data, t_animation *a, t_sprite s,
 		t_sprite_slice slice)
 {
 	t_img	*frame;
+	int		i;
+	int		j;
 
-	int i, j;
 	(void)data;
 	frame = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!frame)
@@ -29,14 +42,13 @@ void	add_frame_anim(t_data *data, t_animation *a, t_sprite s,
 		while (j < slice.height)
 		{
 			put_pixel_img_anim(frame, j, i, get_pixel_img_anim(s.sprite_img,
-						slice.x + j, slice.y + i));
+					slice.x + j, slice.y + i));
 			j++;
 		}
 		i++;
 	}
 	ft_lstadd_back(&a->frames, ft_lstnew(frame));
 }
-
 
 t_animation	*slice_sprite_anim(t_sprite_params params)
 {
@@ -46,7 +58,8 @@ t_animation	*slice_sprite_anim(t_sprite_params params)
 	a = (t_animation *)ft_calloc(sizeof(t_animation), 1);
 	if (!a)
 		return (NULL);
-	*a = (t_animation){NULL, params.slice.width, params.slice.height, params.delay, 0, 0, 0, 0, params.entity};
+	*a = (t_animation){NULL, params.slice.width, params.slice.height,
+		params.delay, 0, 0, 0, 0, params.entity};
 	i = 0;
 	while (i < params.frames)
 	{

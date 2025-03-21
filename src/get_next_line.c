@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:06:00 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 18:08:16 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 02:57:09 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*ft_join(char *stock, int fd)
 
 static char	*free_if_empty(char *str)
 {
-	if (str[0] == '\0')
+	if (str && str[0] == '\0')
 	{
 		free(str);
 		str = NULL;
@@ -72,7 +72,16 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	stock = ft_join(stock, fd);
-	if (stock == NULL || stock[0] == '\0')
+	if (!stock)
+		return (NULL);
+	if (stock[0] == '\n' && stock[1] == '\n')
+	{
+		printf("Error: Empty line in map.\n");
+		free(stock);
+		stock = NULL;
+		return (NULL);
+	}
+	if (stock[0] == '\0')
 	{
 		free(stock);
 		stock = NULL;

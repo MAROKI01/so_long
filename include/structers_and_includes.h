@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:36:30 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 18:02:25 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 02:54:05 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCTERS_AND_INCLUDES_H
 
 # define MAX_KEYS 256
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 1
 # define IMG_SIZE 32
 # define PLAYER_H 109
 # define PLAYER_W 109
@@ -151,30 +151,76 @@ typedef struct s_data
 
 typedef struct s_vertex
 {
-	int			x;
-	int			y;
-}				t_vertex;
+	int				x;
+	int				y;
+}					t_vertex;
 
 typedef struct s_bfs_params
 {
-	char		**map;
-	int			width;
-	int			height;
-	int			p_x;
-	int			p_y;
-	int			*collectibles;
-	int			*exit_found;
-}				t_bfs_params;
+	char			**map;
+	int				width;
+	int				height;
+	int				p_x;
+	int				p_y;
+	int				*collectibles;
+	int				*exit_found;
+}					t_bfs_params;
 
 typedef struct s_bfs
 {
-	t_vertex	*queue;
-	int			**was_visited;
-	int			rear;
-	int			front;
-	int			width;
-	int			height;
-	char		**map;
-}				t_bfs;
+	t_vertex		*queue;
+	int				**was_visited;
+	int				rear;
+	int				front;
+	int				width;
+	int				height;
+	char			**map;
+}					t_bfs;
+
+typedef struct s_collision_box
+{
+	int				offset_left;
+	int				offset_right;
+	int				offset_top;
+	int				offset_bottom;
+	int				col_x;
+	int				col_y;
+	int				col_w;
+	int				col_h;
+	int				center_y;
+	int				center_x;
+	int				sample_step;
+}					t_collision_box;
+
+enum				e_entity
+{
+	PLAYER,
+	ENEMY,
+	EVENT,
+	OBJ,
+};
+
+typedef struct s_sprite_params
+{
+	t_data			*data;
+	t_sprite		sprite;
+	t_sprite_slice	slice;
+	int				frames;
+	int				delay;
+	enum e_entity	entity;
+}					t_sprite_params;
+
+typedef struct s_animation
+{
+	t_list			*frames;
+	int				width;
+	int				height;
+	int				delay;
+	int				_tmp_delay;
+	int				current_frame_num;
+	long int		last_updated;
+	long int		frame_count;
+	enum e_entity	entity;
+}					t_animation;
 
 #endif

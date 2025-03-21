@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 01:30:55 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/21 01:31:49 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/utils.h"
 
 t_list	*ft_lstget_anim(t_list *lst, int index)
@@ -23,7 +35,7 @@ t_list	*ft_lstget_anim(t_list *lst, int index)
 
 void	ft_lstiter_param_anim(t_list *lst, void (*f)(void *, void *), void *ptr)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = lst;
 	while (temp != NULL)

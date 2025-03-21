@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:17:07 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 18:20:32 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:58:56 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void	calculate_new_position(t_data *data, int i, int *new_x, int *new_y)
 	else if (data->enemies[i].direction == 3)
 		(*new_y)--;
 }
+
 int	is_player_nearby(t_data *data, int enemy_x, int enemy_y)
 {
-	int player_grid_x;
-	int player_grid_y;
-	int distance;
+	int	player_grid_x;
+	int	player_grid_y;
+	int	distance;
 
 	player_grid_x = data->player.p_x / IMG_SIZE;
 	player_grid_y = data->player.p_y / IMG_SIZE;

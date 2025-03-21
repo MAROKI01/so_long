@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:09:15 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 18:11:10 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:40:27 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	clean_up(t_data *data)
 		while (i < data->height)
 			free(data->grid[i++]);
 		free(data->grid);
+		data->grid = NULL;
 	}
 	if (data->mlx)
 		free_images(data);

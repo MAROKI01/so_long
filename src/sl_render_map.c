@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sl_render_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 00:39:27 by ntahadou          #+#    #+#             */
+/*   Updated: 2025/03/21 00:57:46 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_utils.h"
 
 int	create_background(t_data *data)
 {
 	data->background.ptr = mlx_new_image(data->mlx,
-											data->width * data->img_size,
-											data->height * data->img_size);
+			data->width * data->img_size,
+			data->height * data->img_size);
 	if (!data->background.ptr)
 		return (1);
 	data->background.addr = mlx_get_data_addr(data->background.ptr,
-												&data->background.bpp,
-												&data->background.line_length,
-												&data->background.endian);
+			&data->background.bpp,
+			&data->background.line_length,
+			&data->background.endian);
 	return (0);
 }
 
@@ -29,7 +41,7 @@ static void	render_game_object(t_data *data, int x, int y)
 		render_walls(data, x, y);
 	}
 	render_player(data, &data->shadow, data->player.p_x + IMG_SIZE + 5,
-			data->player.p_y + IMG_SIZE);
+		data->player.p_y + IMG_SIZE);
 	if (data->grid[y][x] == 'E')
 	{
 		if (data->is_exit_open == 0)
@@ -43,6 +55,7 @@ static int	render_grid(t_data *data)
 {
 	int	x;
 	int	y;
+	int	i;
 
 	y = 0;
 	while (y < data->height)
@@ -57,17 +70,13 @@ static int	render_grid(t_data *data)
 		}
 		y++;
 	}
-	return (0);
-}
-
-static void	render_enemies(t_data *data)
-{
-	int	i;
-
-	for (i = 0; i < data->enemy_count; i++)
+	i = 0;
+	while (i < data->enemy_count)
 	{
 		render_tile(data, &data->enemy, data->enemies[i].x, data->enemies[i].y);
+		i++;
 	}
+	return (0);
 }
 
 int	render_map(t_data *data)
@@ -80,7 +89,6 @@ int	render_map(t_data *data)
 		return (1);
 	if (render_grid(data))
 		return (1);
-	render_enemies(data);
 	graphic_counter(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->background.ptr, 0, 0);
 	return (0);
