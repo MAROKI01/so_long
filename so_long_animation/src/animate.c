@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 01:12:28 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/21 01:16:40 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:29:28 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_sprite	init_sprite(t_data *data, char *file_path, int frames,
 	s1 = new_sprite_anim("sprite", file_path, &tutorial);
 	if (!s1.sprite_img.ptr)
 	{
+		clean_up(data);
 		destroy_sprite_anim(s1);
-		destroy_window_anim(tutorial);
-		return (s1);
+		exit(1);
 	}
 	slice1 = (t_sprite_slice)slice;
 	params.data = data;

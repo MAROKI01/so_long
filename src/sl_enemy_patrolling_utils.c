@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:17:07 by ntahadou          #+#    #+#             */
-/*   Updated: 2025/03/20 23:58:56 by ntahadou         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:52:21 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@ int	is_valid_move(t_data *data, int new_x, int new_y)
 		return (0);
 	if (new_y < 0 || new_y >= data->height)
 		return (0);
-	if (data->grid[new_y][new_x] != '0')
-		return (0);
-	return (1);
+	if (data->grid[new_y][new_x] == '0'
+		|| data->grid[new_y][new_x] == 'C')
+		return (1);
+	return (0);
 }
 
 void	process_enemy_move(t_data *data, int i, int new_x, int new_y)
 {
-	data->grid[data->enemies[i].y][data->enemies[i].x] = '0';
+	if (data->grid[data->enemies[i].y][data->enemies[i].x] != 'C')
+		data->grid[data->enemies[i].y][data->enemies[i].x] = '0';
 	data->enemies[i].x = new_x;
 	data->enemies[i].y = new_y;
-	data->grid[new_y][new_x] = 'A';
+	if (data->grid[new_y][new_x] != 'C')
+		data->grid[new_y][new_x] = 'A';
 }
 
 void	change_enemy_direction(t_data *data, int i)

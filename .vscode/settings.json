@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "so_long_utils.h": "c",
-        "structers_and_includes.h": "c"
+        "structers_and_includes.h": "c",
+        "utils.h": "c"
     }
 }
